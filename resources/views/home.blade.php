@@ -8,7 +8,9 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    <p>You are logged in!</p>
+                    <a href="#" class="btn btn-primary">Register as a Donor</a>
+                    <a href="#" class="btn btn-primary">Register as a Hospital</a>
                 </div>
             </div>
         </div>
