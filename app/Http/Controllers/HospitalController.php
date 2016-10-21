@@ -93,7 +93,11 @@ class HospitalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $hospital = Hospital::find($id);
+        
+        return view('hospital.edit', [
+            'hospital' => $hospital
+        ]);
     }
 
     /**
@@ -105,7 +109,17 @@ class HospitalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, $this->rules);
+
+        $hospital = Hospital::find($id);
+        $hospital->avatar = 'default.png';
+        $hospital->name = $request->name;
+        $hospital->reg_no = $request->reg_no;
+        $hospital->contact_no = $request->contact_no;
+        $hospital->address = $request->address;
+        $hospital->save();
+
+        return redirect()->route('hospital.show', [$hospital]);
     }
 
     /**

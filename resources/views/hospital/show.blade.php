@@ -9,8 +9,9 @@
             <p>
                 <strong>Regitration Number:</strong> {{ $hospital->reg_no }} <br>
                 <strong>Contact Number:</strong> {{ $hospital->contact_no }} <br>
-                <strong>Address:</strong> {{ $hospital->address }} 
+                <strong>Address:</strong> {{ $hospital->address }}
             </p>
+            <a href="{{ route('hospital.edit', $hospital->id) }}" class="btn btn-primary">Edit</a>
         </div>
     </div>
 </div>
