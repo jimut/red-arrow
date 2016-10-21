@@ -9,8 +9,8 @@
 
                 <div class="panel-body">
                     <p>You are logged in!</p>
-                    <a href="#" class="btn btn-primary">Register as a Donor</a>
-                    <a href="#" class="btn btn-primary">Register as a Hospital</a>
+                    <a href="{{ route('donor.create') }}" class="btn btn-primary">Register as a Donor</a>
+                    <a href="{{ route('hospital.create') }}" class="btn btn-primary">Register as a Hospital</a>
                 </div>
             </div>
         </div>

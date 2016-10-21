@@ -14,3 +14,6 @@
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
+
+Route::resource('donor', 'DonorController');
+Route::resource('hospital', 'HospitalController');

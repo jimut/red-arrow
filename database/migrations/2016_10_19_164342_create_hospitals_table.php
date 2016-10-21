@@ -19,7 +19,7 @@ class CreateHospitalsTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('name');
             $table->string('reg_no');
-            $table->string('address');
+            $table->text('address');
             $table->string('contact_no');
 
             $table->integer('user_id')->unsigned();
