@@ -21,7 +21,7 @@ class HospitalController extends Controller
         'address' => 'required',
     ];
 
-    public function __contructor()
+    public function __constructor()
     {
         $this->middleware('auth', ['except' => [
             'index', 'show'
@@ -94,7 +94,7 @@ class HospitalController extends Controller
     public function edit($id)
     {
         $hospital = Hospital::find($id);
-        
+
         return view('hospital.edit', [
             'hospital' => $hospital
         ]);
