@@ -52,7 +52,7 @@
                   <label for="contact_no" class="col-md-4 control-label">Contact Number</label>
 
                   <div class="col-md-6">
-                      <input id="contact_no" type="text" class="form-control" name="contact_no" value="{{ old('contact_no') }}" required>
+                      <input id="contact_no" type="number" class="form-control" name="contact_no" value="{{ old('contact_no') }}" required>
 
                       @if ($errors->has('contact_no'))
                           <span class="help-block">
@@ -65,7 +65,16 @@
               <div class="form-group {{ $errors->has('blood_type') ? 'has-blood_type' : '' }}">
                   <label for="blood-type" class="col-md-4 control-label">Blood Type</label>
                   <div class="col-md-6">
-                      <input id="blood_type" type="text" class="form-control" name="blood_type" value="{{ old('blood_type') }}" required>
+                    <select id="blood_type" value="{{ old('blood_type') }}"  class="form-control" name="blood_type" required>
+                      <option class="selected">A+</option>
+                      <option>A-</option>
+                      <option>B+</option>
+                      <option>B-</option>
+                      <option>AB+</option>
+                      <option>AB-</option>
+                      <option>O+</option>
+                      <option>O-</option>
+                    </select>
                       @if ($errors->has('blood_type'))
                           <span class="help-block">
                               <strong>{{ $errors->first('blood_type') }}</strong>
@@ -77,7 +86,7 @@
               <div class="form-group {{ $errors->has('health_issues') ? 'has-health_issues' : '' }}">
                   <label for="health_issues" class="col-md-4 control-label">Health Issues</label>
                   <div class="col-md-6">
-                      <textarea id="health_issues" class="form-control" name="health_issues" value="{{ old('health_issues') }}" fixed></textarea>
+                      <textarea style="resize:none;" id="health_issues" class="form-control" name="health_issues" value="{{ old('health_issues') }}"></textarea>
                       @if ($errors->has('health_issues'))
                           <span class="help-block">
                               <strong>{{ $errors->first('health_issues') }}</strong>
