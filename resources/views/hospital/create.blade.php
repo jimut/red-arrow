@@ -71,6 +71,10 @@
                         </div>
 
                         <div class="form-group">
+                            <div class="address-input-map"></div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <input type="submit" class="btn btn-primary" value="Submit">
                             </div>
