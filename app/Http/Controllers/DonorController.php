@@ -24,7 +24,7 @@ class DonorController extends Controller
 
    public function __constructor(){
      $this->middleware('auth',['except'=>[
-      'index'=>'show'
+      'index', 'show'
      ]]);
    }
     /**
@@ -55,7 +55,8 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,$this->rules);
+        $this->validate($request, $this->rules);
+
         $donor=new Donor;
         $donor->avatar = 'default.png';
         $donor->name = $request->name;
@@ -94,7 +95,9 @@ class DonorController extends Controller
     {
       $donor=Donor::find($id);
 
-      return view('donor.edit',['donor'=>$donor]);
+      return view('donor.edit', [
+        'donor' => $donor,
+      ]);
     }
 
     /**
@@ -108,7 +111,7 @@ class DonorController extends Controller
     {
       $this->validate($request,$this->rules);
 
-      $donor=Donor::find($id);
+      $donor = Donor::find($id);
       $donor->avatar = 'default.png';
       $donor->name = $request->name;
       $donor->dob= $request->dob;

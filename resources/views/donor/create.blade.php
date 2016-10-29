@@ -8,18 +8,18 @@
           <div class="panel-heading">Register as a Donor</div>
 
           <div class="panel-body">
-            <form class="form-horizontal" action="{{Route('donor.store')}}" method="POST">
+            <form class="form-horizontal" action="{{ route('donor.store') }}" method="POST">
 
               {{ csrf_field() }}
 
-              <div class="form-group {{ $errors->has('name') ? 'has-name' : '' }}">
+              <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                 <label for="name" class="col-md-4 control-label">Donor Name</label>
                 <div class="col-md-6">
                   <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" required autofocus>
                   @if ($errors->has('name'))
-                  <span class="help-block">
-                  <strong>{{ $errors->first('name')}}</strong>
-                  </span>
+                    <span class="help-block">
+                      <strong>{{ $errors->first('name') }}</strong>
+                    </span>
                   @endif
                 </div>
               </div>
@@ -62,11 +62,11 @@
                   </div>
               </div>
 
-              <div class="form-group {{ $errors->has('blood_type') ? 'has-blood_type' : '' }}">
+              <div class="form-group {{ $errors->has('blood_type') ? 'has-error' : '' }}">
                   <label for="blood-type" class="col-md-4 control-label">Blood Type</label>
                   <div class="col-md-6">
                     <select id="blood_type" value="{{ old('blood_type') }}"  class="form-control" name="blood_type" required>
-                      <option class="selected">A+</option>
+                      <option>A+</option>
                       <option>A-</option>
                       <option>B+</option>
                       <option>B-</option>
@@ -83,7 +83,7 @@
                   </div>
               </div>
 
-              <div class="form-group {{ $errors->has('health_issues') ? 'has-health_issues' : '' }}">
+              <div class="form-group {{ $errors->has('health_issues') ? 'has-error' : '' }}">
                   <label for="health_issues" class="col-md-4 control-label">Health Issues</label>
                   <div class="col-md-6">
                       <textarea style="resize:none;" id="health_issues" class="form-control" name="health_issues" value="{{ old('health_issues') }}"></textarea>
