@@ -8,8 +8,9 @@
             <h1>{{ $donor->name }}</h1>
             <p>
                 <strong>Date of Birth:</strong> {{ $donor->dob }} <br>
+                <strong>Address:</strong> {{ $donor->address }} <br>
+                <strong>Blood Type:</strong> {{ $donor->blood_type }} <br>
                 <strong>Contact Number:</strong> {{ $donor->contact_no }} <br>
-                <strong>Address:</strong> {{ $donor->address }}
             </p>
             <a href="{{ route('donor.edit', $donor->id) }}" class="btn btn-primary">Edit</a>
         </div>

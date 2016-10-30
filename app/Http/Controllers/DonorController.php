@@ -82,7 +82,9 @@ class DonorController extends Controller
     {
         $donor=Donor::find($id);
 
-        return view('donor.show',['donor'=>$donor]);
+        return view('donor.show',[
+          'donor' => $donor,
+        ]);
     }
 
     /**
