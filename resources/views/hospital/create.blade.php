@@ -60,7 +60,14 @@
                             <label for="address" class="col-md-4 control-label">Address</label>
 
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required>
+                                <div class="input-group">
+                                    <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('address'))
                                     <span class="help-block">
