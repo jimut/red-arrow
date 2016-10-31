@@ -42,11 +42,15 @@ function tryGeoLocation () {
 
         let geocoder = new google.maps.Geocoder();
         geocoder.geocode({location: loc}, function (results, status) {
-            if (status !== 'OK')
+            if (status !== 'OK') {
                 window.alert('Geocoder failed due to: ' + status);
+                return;
+            }
 
-            if (!results[0])
+            if (!results[0]) {
                 window.alert('No results found');
+                return;
+            }
 
             document.getElementById('address').value = results[0].formatted_address;
         });
