@@ -39,5 +39,16 @@ function tryGeoLocation () {
         });
         map.setCenter(loc);
         map.setZoom(14);
+
+        let geocoder = new google.maps.Geocoder();
+        geocoder.geocode({location: loc}, function (results, status) {
+            if (status !== 'OK')
+                window.alert('Geocoder failed due to: ' + status);
+
+            if (!results[0])
+                window.alert('No results found');
+
+            document.getElementById('address').value = results[0].formatted_address;
+        });
     });
 }
