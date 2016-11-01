@@ -54,6 +54,11 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <div id="address-input-map"></div>
+                                <input id="pac-input" type="text" class="map-control" placeholder="Search...">
+                            </div>
+
                             <div class="form-group {{ $errors->has('contact_no') ? 'has-error' : '' }}">
                                 <label for="contact_no" class="col-md-4 control-label">Contact Number</label>
 
