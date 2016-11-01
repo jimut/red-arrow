@@ -9,10 +9,12 @@ require('./bootstrap');
 
 window.initMap = function () {
     initAddressInputMaps();
+    initAutocomplete();
     tryGeoLocation();
 };
 
 var map;
+var marker;
 
 function initAddressInputMaps () {
     let elms = $('.address-input-map');
@@ -26,33 +28,78 @@ function initAddressInputMaps () {
     }
 }
 
+function initAutocomplete () {
+    let input = document.getElementById('pac-input');
+    let searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    map.addListener('bounds_changed', function () {
+        searchBox.setBounds(map.getBounds());
+    });
+
+    searchBox.addListener('places_changed', function () {
+        let places = searchBox.getPlaces();
+
+        if (places.length === 0)
+            return;
+
+        let prefPlace = places[0];
+
+        if (!prefPlace.geometry) {
+            console.log('Returned place contains no geometry');
+            return;
+        }
+
+        changeAddress(prefPlace.geometry.location, prefPlace.formatted_address);
+
+        if (prefPlace.geometry.viewport) {
+            map.fitBounds(prefPlace.geometry.viewport);
+        }
+    });
+}
+
 function tryGeoLocation () {
     if (!('geolocation' in navigator))
         return;
 
     navigator.geolocation.getCurrentPosition(function (pos) {
-        let loc = {lat: pos.coords.latitude, lng: pos.coords.longitude};
-        new google.maps.Marker({
-            position: loc,
-            map: map,
-            draggable: true
-        });
-        map.setCenter(loc);
-        map.setZoom(14);
+        let location = {lat: pos.coords.latitude, lng: pos.coords.longitude};
+        changeAddress(location);
+    });
+}
 
-        let geocoder = new google.maps.Geocoder();
-        geocoder.geocode({location: loc}, function (results, status) {
-            if (status !== 'OK') {
-                window.alert('Geocoder failed due to: ' + status);
-                return;
-            }
+function changeAddress (location, formattedAddress) {
+    if (marker instanceof google.maps.Marker)
+        marker.setMap(null);
 
-            if (!results[0]) {
-                window.alert('No results found');
-                return;
-            }
+    marker = new google.maps.Marker({
+        map: map,
+        position: location,
+        draggable: true
+    });
+    map.setCenter(location);
+    map.setZoom(14);
 
-            document.getElementById('address').value = results[0].formatted_address;
-        });
+    let addressInput = document.getElementById('address');
+    if (formattedAddress && addressInput.value === '') {
+        addressInput.value = formattedAddress;
+        return;
+    }
+
+    let geocoder = new google.maps.Geocoder();
+    geocoder.geocode({location: location}, function (results, status) {
+        if (status !== 'OK') {
+            window.alert('Geocoder failed due to: ' + status);
+            return;
+        }
+
+        if (!results[0]) {
+            window.alert('No results found');
+            return;
+        }
+
+        if (addressInput.value === '') {
+            addressInput.value = results[0].formatted_address;
+        }
     });
 }
