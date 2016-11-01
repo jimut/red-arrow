@@ -66,7 +66,7 @@
                             <label for="contact_no" class="col-md-4 control-label">Contact Number</label>
 
                             <div class="col-md-6">
-                                <input id="contact_no" type="number"  class="form-control" name="contact_no" value="{{ $donor->contact_no }}" required>
+                                <input id="contact_no" type="number" class="form-control" name="contact_no" value="{{ $donor->contact_no }}" required>
 
                                 @if ($errors->has('contact_no'))
                                     <span class="help-block">
@@ -80,7 +80,7 @@
                             <label for="blood-type" class="col-md-4 control-label">Blood Type</label>
 
                             <div class="col-md-6">
-                                <select id="blood_type" value="{{ $donor->blood_type }}"  class="form-control" name="blood_type" required>
+                                <select id="blood_type" value="{{ $donor->blood_type }}" class="form-control" name="blood_type" required>
                                     <option>A+</option>
                                     <option>A-</option>
                                     <option>B+</option>
@@ -103,7 +103,7 @@
                             <label for="health_issues" class="col-md-4 control-label">Health Issues</label>
 
                             <div class="col-md-6">
-                                <textarea id="health_issues" style="resize:none;" class="form-control" name="health_issues" value="{{ $donor->health_issues }}"></textarea>
+                                <textarea id="health_issues" class="form-control" name="health_issues" value="{{ $donor->health_issues }}"></textarea>
 
                                 @if ($errors->has('health_issues'))
                                     <span class="help-block">
