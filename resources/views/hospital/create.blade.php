@@ -73,6 +73,8 @@
                         <div class="form-group">
                             <div id="address-input-map"></div>
                             <input id="pac-input" type="text" class="map-control" placeholder="Search...">
+                            <input id="map_lat" type="hidden" name="map_lat">
+                            <input id="map_lng" type="hidden" name="map_lng">
                         </div>
 
                         <div class="form-group">

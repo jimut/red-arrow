@@ -100,3 +100,19 @@ function changeAddress (location, formattedAddress) {
         }
     });
 }
+
+
+$(function () {
+    $('#address-input-map').parents('form')[0].onsubmit = function (e) {
+        if (!(marker instanceof google.maps.Marker))
+            return false;
+
+        let mapLat = $('#map_lat');
+        let mapLng = $('#map_lng');
+
+        mapLat.value = marker.getPosition().lat();
+        mapLng.value = marker.getPosition().lng();
+
+        return true;
+    };
+});
