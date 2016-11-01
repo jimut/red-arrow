@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="address-input-map"></div>
+                            <div id="address-input-map"></div>
                             <input id="pac-input" type="text" class="map-control" placeholder="Search...">
                         </div>
 
