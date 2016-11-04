@@ -110,8 +110,8 @@ $(function () {
         let mapLat = $('#map_lat');
         let mapLng = $('#map_lng');
 
-        mapLat.value = marker.getPosition().lat();
-        mapLng.value = marker.getPosition().lng();
+        mapLat.attr('value', marker.getPosition().lat());
+        mapLng.attr('value', marker.getPosition().lng());
 
         return true;
     };

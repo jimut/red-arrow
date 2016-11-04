@@ -19,6 +19,8 @@ class HospitalController extends Controller
         'reg_no' => 'required',
         'contact_no' => 'required',
         'address' => 'required',
+        'map_lat' => 'required',
+        'map_lng' => 'required',
     ];
 
     public function __constructor()
@@ -64,6 +66,8 @@ class HospitalController extends Controller
         $hospital->reg_no = $request->reg_no;
         $hospital->contact_no = $request->contact_no;
         $hospital->address = $request->address;
+        $hospital->map_lat = $request->map_lat;
+        $hospital->map_lng = $request->map_lng;
         $hospital->user_id = $request->user()->id;
         $hospital->save();
 
@@ -117,6 +121,8 @@ class HospitalController extends Controller
         $hospital->reg_no = $request->reg_no;
         $hospital->contact_no = $request->contact_no;
         $hospital->address = $request->address;
+        $hospital->map_lat = $request->map_lat;
+        $hospital->map_lng = $request->map_lng;
         $hospital->save();
 
         return redirect()->route('hospital.show', [$hospital]);

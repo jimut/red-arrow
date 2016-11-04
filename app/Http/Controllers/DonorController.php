@@ -18,6 +18,8 @@ class DonorController extends Controller
         'name' => 'required',
         'dob' => 'required',
         'address' => 'required',
+        'map_lat' => 'required',
+        'map_lng' => 'required',
         'contact_no' => 'required',
         'blood_type' => 'required',
     ];
@@ -63,12 +65,14 @@ class DonorController extends Controller
         $donor->name = $request->name;
         $donor->dob = $request->dob;
         $donor->address = $request->address;
+        $donor->map_lat = $request->map_lat;
+        $donor->map_lng = $request->map_lng;
         $donor->contact_no = $request->contact_no;
         $donor->blood_type = $request->blood_type;
         $donor->health_issues = $request->health_issues;
         $donor->user_id = $request->user()->id;
-
         $donor->save();
+        
         return redirect()->route('donor.show',[$donor]);
 
     }
@@ -119,6 +123,8 @@ class DonorController extends Controller
         $donor->name = $request->name;
         $donor->dob = $request->dob;
         $donor->address = $request->address;
+        $donor->map_lat = $request->map_lat;
+        $donor->map_lng = $request->map_lng;
         $donor->contact_no = $request->contact_no;
         $donor->blood_type = $request->blood_type;
         $donor->health_issues = $request->health_issues;
