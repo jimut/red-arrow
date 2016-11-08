@@ -48,7 +48,7 @@ class DonorController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->hospital) 
+        if (Auth::user()->hospital)
             abort(403);
 
         return view('donor.create');
@@ -148,5 +148,14 @@ class DonorController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Find donors
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function find() {
+        return view('donor.find');
     }
 }

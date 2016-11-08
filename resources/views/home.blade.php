@@ -10,9 +10,11 @@
                 <div class="panel-body">
                     <p>You are logged in!</p>
 
-                    @if ($userType !== 'Registered')
+                    @if (!$isUserRegistered)
                         <a href="{{ route('donor.create') }}" class="btn btn-primary">Register as a Donor</a>
                         <a href="{{ route('hospital.create') }}" class="btn btn-primary">Register as a Hospital</a>
+                    @elseif ($isUserHospital)
+                        <a href="{{ route('donor.find') }}" class="btn btn-primary">Search for a Donor</a>
                     @endif
                 </div>
             </div>

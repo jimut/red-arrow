@@ -24,12 +24,19 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $isUserRegistered = false;
         if (Auth::user()->hospital || Auth::user()->donor) {
-            $userType = 'Registered';
+            $isUserRegistered = true;
+        }
+
+        $isUserHospital = false;
+        if (Auth::user()->hospital) {
+            $isUserHospital = true;
         }
 
         return view('home', [
-            'userType' => $userType,
+            'isUserRegistered' => $isUserRegistered,
+            'isUserHospital' => $isUserHospital,
         ]);
     }
 }

@@ -17,3 +17,8 @@ Auth::routes();
 
 Route::resource('donor', 'DonorController');
 Route::resource('hospital', 'HospitalController');
+
+Route::get('find', [
+    'as' => 'donor.find',
+    'uses' => 'DonorController@find'
+]);
