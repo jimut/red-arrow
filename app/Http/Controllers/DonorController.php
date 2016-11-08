@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Donor;
 use Illuminate\Http\Request;
 
@@ -47,6 +48,9 @@ class DonorController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->hospital) 
+            abort(403);
+
         return view('donor.create');
     }
 
@@ -58,6 +62,9 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::user()->hospital)
+            abort(403);
+
         $this->validate($request, $this->rules);
 
         $donor = new Donor;
@@ -72,9 +79,8 @@ class DonorController extends Controller
         $donor->health_issues = $request->health_issues;
         $donor->user_id = $request->user()->id;
         $donor->save();
-        
-        return redirect()->route('donor.show',[$donor]);
 
+        return redirect()->route('donor.show',[$donor]);
     }
 
     /**

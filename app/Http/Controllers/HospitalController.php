@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Hospital;
 use Illuminate\Http\Request;
 
@@ -47,6 +48,9 @@ class HospitalController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->donor)
+            abort(403);
+
         return view('hospital.create');
     }
 
@@ -58,6 +62,9 @@ class HospitalController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::user()->donor)
+            abort(403);
+
         $this->validate($request, $this->rules);
 
         $hospital = new Hospital;

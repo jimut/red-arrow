@@ -9,8 +9,11 @@
 
                 <div class="panel-body">
                     <p>You are logged in!</p>
-                    <a href="{{ route('donor.create') }}" class="btn btn-primary">Register as a Donor</a>
-                    <a href="{{ route('hospital.create') }}" class="btn btn-primary">Register as a Hospital</a>
+
+                    @if ($userType !== 'Registered')
+                        <a href="{{ route('donor.create') }}" class="btn btn-primary">Register as a Donor</a>
+                        <a href="{{ route('hospital.create') }}" class="btn btn-primary">Register as a Hospital</a>
+                    @endif
                 </div>
             </div>
         </div>
