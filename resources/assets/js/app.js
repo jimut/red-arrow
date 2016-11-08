@@ -10,6 +10,7 @@ require('./bootstrap');
 window.initMap = function () {
     initAddressInputMaps();
     initAutocomplete();
+    tryPreviousLocation();
     tryGeoLocation();
 };
 
@@ -55,7 +56,22 @@ function initAutocomplete () {
     });
 }
 
+function tryPreviousLocation () {
+    let mapLat = document.getElementById('map_lat').value;
+    let mapLng = document.getElementById('map_lng').value;
+
+    if (!mapLat || !mapLng)
+        return;
+
+    console.log(mapLat + ' ' + mapLng);
+    let location = {lat: parseFloat(mapLat), lng: parseFloat(mapLng)};
+    changeAddress(location);
+}
+
 function tryGeoLocation () {
+    if (document.getElementById('map_lat').value || document.getElementById('map_lng').value)
+        return;
+
     if (!('geolocation' in navigator))
         return;
 
