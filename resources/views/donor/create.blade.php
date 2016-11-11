@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('blood_type') ? 'has-error' : '' }}">
-                                <label for="blood-type" class="col-md-4 control-label">Blood Type</label>
+                                <label for="blood_type" class="col-md-4 control-label">Blood Type</label>
 
                                 <div class="col-md-6">
                                     <select id="blood_type" value="{{ old('blood_type') }}" class="form-control" name="blood_type" required>
