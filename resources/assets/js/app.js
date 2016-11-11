@@ -124,7 +124,23 @@ function changeAddress (location, formattedAddress) {
 }
 
 function initFindMap () {
-    
+    let elm = document.getElementById('find-map');
+    let loc = new google.maps.LatLng(22, 78);
+    map = new google.maps.Map(elm, {
+        zoom: 4,
+        center: loc
+    });
+
+    $.ajax('/', {
+        success: function (data) {
+            let loc = new google.maps.LatLng(data.userInformation.map_lat, data.userInformation.map_lng);
+            map.setCenter(loc);
+            map.setZoom(14);
+        },
+        error: function () {
+            console.log('Cannot retrieve user information');
+        }
+    });
 }
 
 $(function () {

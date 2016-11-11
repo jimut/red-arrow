@@ -30,6 +30,6 @@
             </div>
         </div>
     </div>
-    
-    <div class="find-map"></div>
+
+    <div id="find-map"></div>
 @endsection
