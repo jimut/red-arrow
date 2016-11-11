@@ -8,10 +8,16 @@
 require('./bootstrap');
 
 window.initMap = function () {
-    initAddressInputMaps();
-    initAutocomplete();
-    tryPreviousLocation();
-    tryGeoLocation();
+    if (document.getElementById('address-input-map') !== null) {
+        initAddressInputMaps();
+        initAutocomplete();
+        tryPreviousLocation();
+        tryGeoLocation();
+    }
+
+    if (document.getElementById('find-map') !== null) {
+        initFindMap();
+    }
 };
 
 var map;
@@ -117,18 +123,23 @@ function changeAddress (location, formattedAddress) {
     });
 }
 
+function initFindMap () {
+    
+}
 
 $(function () {
-    $('#address-input-map').parents('form')[0].onsubmit = function (e) {
-        if (!(marker instanceof google.maps.Marker))
-            return false;
+    if (document.getElementById('address-input-map') !== null) {
+        $('#address-input-map').parents('form')[0].onsubmit = function (e) {
+            if (!(marker instanceof google.maps.Marker))
+                return false;
 
-        let mapLat = $('#map_lat');
-        let mapLng = $('#map_lng');
+            let mapLat = $('#map_lat');
+            let mapLng = $('#map_lng');
 
-        mapLat.attr('value', marker.getPosition().lat());
-        mapLng.attr('value', marker.getPosition().lng());
+            mapLat.attr('value', marker.getPosition().lat());
+            mapLng.attr('value', marker.getPosition().lng());
 
-        return true;
-    };
+            return true;
+        };
+    }
 });
