@@ -36,9 +36,13 @@ class DonorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $donors = Donor::all();
+
+        if ($request->ajax()) {
+            return response()->json($donors->toArray());
+        }
     }
 
     /**

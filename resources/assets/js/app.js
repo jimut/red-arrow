@@ -141,6 +141,32 @@ function initFindMap () {
             console.log('Cannot retrieve user information');
         }
     });
+
+    addEventListeners();
+    findDonors();
+}
+
+function addEventListeners () {
+    if (!document.getElementById('blood_type') || !document.getElementById('search_radius'))
+        return;
+
+    $('#blood_type').change(inputChangeCallback);
+    $('#search_radius').change(inputChangeCallback);
+
+    function inputChangeCallback () {
+        findDonors();
+    }
+}
+
+function findDonors () {
+    $.ajax('/donor', {
+        success: function (data) {
+            console.log(data);
+        },
+        error: function () {
+            console.log('An error occured while fetching donors');
+        }
+    });
 }
 
 $(function () {
