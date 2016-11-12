@@ -123,6 +123,9 @@ function changeAddress (location, formattedAddress) {
     });
 }
 
+var hospitalLoc;
+var donorMarkers = [];
+
 function initFindMap () {
     let elm = document.getElementById('find-map');
     let loc = new google.maps.LatLng(22, 78);
@@ -136,6 +139,8 @@ function initFindMap () {
             let loc = new google.maps.LatLng(data.userInformation.map_lat, data.userInformation.map_lng);
             map.setCenter(loc);
             map.setZoom(14);
+
+            hospitalLoc = loc;
         },
         error: function () {
             console.log('Cannot retrieve user information');
@@ -160,13 +165,41 @@ function addEventListeners () {
 
 function findDonors () {
     $.ajax('/donor', {
-        success: function (data) {
-            console.log(data);
+        success: function (donors) {
+            filterDonors(donors);
         },
         error: function () {
             console.log('An error occured while fetching donors');
         }
     });
+
+    function filterDonors (donors) {
+        let bloodType = $('#blood_type').val();
+        let searchRadius = $('#search_radius').val() * 1000;
+
+        donorMarkers.forEach(function (mkr) {
+            mkr.setMap(null);
+        });
+
+        for (let i = 0; i < donors.length; i++) {
+            let donor = donors[i];
+
+            if (donor.blood_type !== bloodType)
+                continue;
+
+            let loc = new google.maps.LatLng(donor.map_lat, donor.map_lng);
+
+            if (google.maps.geometry.spherical.computeDistanceBetween(hospitalLoc, loc) > searchRadius)
+                continue;
+
+            let mkr = new google.maps.Marker({
+                map: map,
+                position: loc
+            });
+
+            donorMarkers.push(mkr);
+        }
+    }
 }
 
 $(function () {
