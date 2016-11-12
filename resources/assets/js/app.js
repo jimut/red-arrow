@@ -125,6 +125,7 @@ function changeAddress (location, formattedAddress) {
 
 var hospitalLoc;
 var donorMarkers = [];
+var donorInfoWindows = [];
 
 function initFindMap () {
     let elm = document.getElementById('find-map');
@@ -181,6 +182,9 @@ function findDonors () {
             mkr.setMap(null);
         });
 
+        donorMarkers = [];
+        donorInfoWindows = [];
+
         for (let i = 0; i < donors.length; i++) {
             let donor = donors[i];
 
@@ -217,8 +221,14 @@ function findDonors () {
         });
 
         mkr.addListener('click', function () {
+            donorInfoWindows.forEach(function (iw) {
+                iw.close();
+            });
+
             infoWindow.open(map, mkr);
         });
+
+        donorInfoWindows.push(infoWindow);
     }
 }
 
