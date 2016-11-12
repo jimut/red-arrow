@@ -197,8 +197,28 @@ function findDonors () {
                 position: loc
             });
 
+            makeInfoWindow(donor, mkr);
+
             donorMarkers.push(mkr);
         }
+    }
+
+    function makeInfoWindow (donor, mkr) {
+        let contentString = '<div style="max-width: 300px;">' +
+                '<h4>' + donor.name + '</h4>' +
+                '<strong>Date of Birth:</strong> ' + donor.dob + '<br/>' +
+                '<strong>Blood Type:</strong> ' + donor.blood_type + '<br/>' +
+                '<strong>Contact Number:</strong> ' + donor.contact_no + '<br/>' +
+                '<strong>Address:</strong> ' + donor.address +
+                '</div>';
+
+        let infoWindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        mkr.addListener('click', function () {
+            infoWindow.open(map, mkr);
+        });
     }
 }
 
