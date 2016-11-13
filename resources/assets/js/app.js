@@ -185,6 +185,9 @@ function findDonors () {
         donorMarkers = [];
         donorInfoWindows = [];
 
+        let bounds = new google.maps.LatLngBounds(null);
+        bounds.extend(hospitalLoc);
+
         for (let i = 0; i < donors.length; i++) {
             let donor = donors[i];
 
@@ -204,7 +207,12 @@ function findDonors () {
             makeInfoWindow(donor, mkr);
 
             donorMarkers.push(mkr);
+
+            bounds.extend(loc);
         }
+
+        map.fitBounds(bounds);
+        map.panToBounds(bounds);
     }
 
     function makeInfoWindow (donor, mkr) {
