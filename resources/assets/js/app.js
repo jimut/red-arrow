@@ -124,6 +124,7 @@ function changeAddress (location, formattedAddress) {
 }
 
 var hospitalLoc;
+var hospitalMarker;
 var donorMarkers = [];
 var donorInfoWindows = [];
 
@@ -137,11 +138,17 @@ function initFindMap () {
 
     $.ajax('/', {
         success: function (data) {
-            let loc = new google.maps.LatLng(data.userInformation.map_lat, data.userInformation.map_lng);
-            map.setCenter(loc);
+            hospitalLoc = new google.maps.LatLng(data.userInformation.map_lat, data.userInformation.map_lng);
+            map.setCenter(hospitalLoc);
             map.setZoom(14);
 
-            hospitalLoc = loc;
+            hospitalMarker = new google.maps.Marker({
+                map: map,
+                position: hospitalLoc,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+            });
+
+            findDonors();
         },
         error: function () {
             console.log('Cannot retrieve user information');
@@ -149,7 +156,6 @@ function initFindMap () {
     });
 
     addEventListeners();
-    findDonors();
 }
 
 function addEventListeners () {
