@@ -11,10 +11,17 @@ class Hospital extends Model
      *
      * @var array
      */
-    protected $visible = ['name', 'reg_no', 'address', 'contact_no', 'map_lat', 'map_lng'];
+    protected $visible = [
+        'name', 'reg_no', 'address', 'contact_no', 'map_lat', 'map_lng'
+    ];
 
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function appointments()
+    {
+        return $this->hasMany('App\Appointment');
     }
 }
