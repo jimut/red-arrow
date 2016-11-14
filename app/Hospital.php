@@ -11,8 +11,8 @@ class Hospital extends Model
      *
      * @var array
      */
-    protected $visible = [
-        'name', 'reg_no', 'address', 'contact_no', 'map_lat', 'map_lng'
+    protected $hidden = [
+        'user_id', 'avatar', 'created_at', 'updated_at'
     ];
 
     public function user()

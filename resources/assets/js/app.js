@@ -224,10 +224,13 @@ function findDonors () {
     function makeInfoWindow (donor, mkr) {
         let contentString = '<div style="max-width: 300px;">' +
                 '<h4>' + donor.name + '</h4>' +
+                '<p>' +
                 '<strong>Date of Birth:</strong> ' + donor.dob + '<br/>' +
                 '<strong>Blood Type:</strong> ' + donor.blood_type + '<br/>' +
                 '<strong>Contact Number:</strong> ' + donor.contact_no + '<br/>' +
                 '<strong>Address:</strong> ' + donor.address +
+                '</p>' +
+                '<button class="btn btn-primary" style="margin-top: 5px;" onclick="sendNotification(this, ' + donor.id + ')">Send Notification</button>' +
                 '</div>';
 
         let infoWindow = new google.maps.InfoWindow({
@@ -245,6 +248,29 @@ function findDonors () {
         donorInfoWindows.push(infoWindow);
     }
 }
+
+window.sendNotification = function (elm, donorId) {
+    $(elm).prop('disabled', true);
+    $(elm).text('Sending...');
+
+    $.ajax('appointment', {
+        method: 'POST',
+        data: {
+            _token: Laravel.csrfToken,
+            donor_id: donorId
+        },
+        success: function () {
+            $(elm).text('Notification Sent');
+        },
+        error: function () {
+            $(elm).text('Failed');
+            setTimeout(function () {
+                $(elm).text('Send Notification');
+                $(elm).prop('disabled', false);
+            }, 1000);
+        }
+    });
+};
 
 $(function () {
     if (document.getElementById('address-input-map') !== null) {

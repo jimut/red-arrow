@@ -22,3 +22,8 @@ Route::get('find', [
     'as' => 'donor.find',
     'uses' => 'DonorController@find'
 ]);
+
+Route::post('appointment', [
+    'as' => 'appointment.store',
+    'uses' => 'AppointmentController@store'
+]);

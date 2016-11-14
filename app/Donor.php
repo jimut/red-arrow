@@ -11,8 +11,8 @@ class Donor extends Model
      *
      * @var array
      */
-    protected $visible = [
-        'name', 'dob', 'address', 'contact_no', 'blood_type', 'health_issues', 'map_lat', 'map_lng'
+    protected $hidden = [
+        'user_id', 'avatar', 'created_at', 'updated_at'
     ];
 
     public function user()
