@@ -22,6 +22,10 @@ Route::get('find', [
     'as' => 'donor.find',
     'uses' => 'DonorController@find'
 ]);
+Route::get('notification', [
+    'as' => 'donor.notification',
+    'uses' => 'DonorController@showNotification'
+]);
 
 Route::post('appointment', [
     'as' => 'appointment.store',

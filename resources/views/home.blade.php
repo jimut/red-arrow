@@ -13,8 +13,15 @@
                     @if (!$isUserRegistered)
                         <a href="{{ route('donor.create') }}" class="btn btn-primary">Register as a Donor</a>
                         <a href="{{ route('hospital.create') }}" class="btn btn-primary">Register as a Hospital</a>
-                    @elseif ($isUserHospital)
+                    @endif
+
+                    @if ($isUserHospital)
                         <a href="{{ route('donor.find') }}" class="btn btn-primary">Search for a Donor</a>
+                    @endif
+
+                    @if ($isUserDonor)
+                        <p>You have {{ $notificationCount }} notifications</p>
+                        <a href="{{ route('donor.notification') }}" class="btn btn-primary">View Notifications</a>
                     @endif
                 </div>
             </div>

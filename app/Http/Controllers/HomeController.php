@@ -25,24 +25,28 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
+
         $isUserRegistered = false;
         $isUserHospital = false;
         $isUserDonor = false;
+        $notificationCount = 0;
 
-        if (Auth::user()->hospital) {
+        if ($user->hospital) {
             $isUserRegistered = true;
             $isUserHospital = true;
         }
 
-        if (Auth::user()->donor) {
+        if ($user->donor) {
             $isUserRegistered = true;
             $isUserDonor = true;
+
+            $notificationCount = $user->donor->appointments->count();
         }
 
         if ($request->ajax()) {
-            $user = Auth::user();
-
             $userInformation = 'User is not registered';
+            
             if ($isUserHospital) {
                 $userInformation = $user->hospital->toArray();
             } else if ($isUserDonor) {
@@ -60,7 +64,8 @@ class HomeController extends Controller
         return view('home', [
             'isUserRegistered' => $isUserRegistered,
             'isUserHospital' => $isUserHospital,
-            'isUserDonor' => $isUserDonor
+            'isUserDonor' => $isUserDonor,
+            'notificationCount' => $notificationCount,
         ]);
     }
 }
