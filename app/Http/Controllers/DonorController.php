@@ -168,7 +168,8 @@ class DonorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showNotification() {
+    public function showNotification()
+    {
         $user = Auth::user();
 
         if (!$user->donor)
@@ -185,6 +186,22 @@ class DonorController extends Controller
 
         return view('donor.notification', [
             'newNotifications' => $newNotifications,
+        ]);
+    }
+     /**
+      * Shows directions from donor location to hospital location
+      *
+      * @return [type]
+      */
+    public function showDirection(Request $request)
+    {
+        $to = [
+            'lat' => explode(',', $request->to)[0],
+            'lng' => explode(',', $request->to)[1]
+        ];
+
+        return view('donor.direction', [
+            'to' => $to
         ]);
     }
 }
