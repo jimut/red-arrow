@@ -7,6 +7,10 @@
 
 require('./bootstrap');
 
+angular.module('RedArrow', []);
+angular.module('RedArrow')
+    .controller('DirectionController', require('./controllers/direction.controller'));
+
 window.initMap = function () {
     if (document.getElementById('address-input-map') !== null) {
         initAddressInputMaps();

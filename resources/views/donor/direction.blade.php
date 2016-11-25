@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container" ng-controller="DirectionController">
     <div class="row">
         <div class="md-col-8 md-col-offset-2">
             <div class="panel panel-default">
