@@ -12,6 +12,9 @@ angular.module('RedArrow')
     .controller('DirectionController', require('./controllers/direction.controller'));
 
 window.initMap = function () {
+    document.dispatchEvent(new Event('mapinit'));
+    window.mapInitialized = true;
+
     if (document.getElementById('address-input-map') !== null) {
         initAddressInputMaps();
         initAutocomplete();

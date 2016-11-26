@@ -9,7 +9,7 @@
                 <div class="panel-heading">Directions</div>
 
                 <div class="panel-body">
-                    <div id="direction-map"></div>
+                    <div id="direction-map" style="height: 700px;"></div>
                 </div>
             </div>
         </div>

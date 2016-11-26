@@ -16,7 +16,8 @@
                             <li class="list-group-item">
                                 <div class="row">
                                     <p class="col-md-8" style="font-size: 18px;">{{ $appointment->hospital->name }}</p>
-                                    <div class="col-md-4"><a href="direction/?to={{ $appointment->hospital->map_lat }},{{ $appointment->hospital->map_lng }}" class="btn btn-primary pull-right">Show Directions</a></div>
+                                    <!-- <div class="col-md-4"><a href="direction/?to={{ $appointment->hospital->map_lat }},{{ $appointment->hospital->map_lng }}" class="btn btn-primary pull-right">Show Directions</a></div> -->
+                                    <div class="col-md-4"><a href="https://www.google.co.in/maps?saddr={{ $donor->map_lat }},{{ $donor->map_lng }}&daddr={{ $appointment->hospital->map_lat }},{{ $appointment->hospital->map_lng }}" target="_blank" class="btn btn-primary pull-right">Show Directions</a></div>
                                 </div>
                             </li>
                         @endforeach

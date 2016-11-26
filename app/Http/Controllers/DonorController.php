@@ -186,6 +186,7 @@ class DonorController extends Controller
 
         return view('donor.notification', [
             'newNotifications' => $newNotifications,
+            'donor' => $user->donor
         ]);
     }
      /**
