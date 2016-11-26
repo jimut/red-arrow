@@ -177,7 +177,6 @@ class DonorController extends Controller
 
         $appointments = $user->donor->appointments;
         $newNotifications = [];
-
         foreach ($appointments as $appointment) {
             if ($appointment->status === 'SENT') {
                 $newNotifications[] = $appointment;
@@ -187,22 +186,6 @@ class DonorController extends Controller
         return view('donor.notification', [
             'newNotifications' => $newNotifications,
             'donor' => $user->donor
-        ]);
-    }
-     /**
-      * Shows directions from donor location to hospital location
-      *
-      * @return [type]
-      */
-    public function showDirection(Request $request)
-    {
-        $to = [
-            'lat' => explode(',', $request->to)[0],
-            'lng' => explode(',', $request->to)[1]
-        ];
-
-        return view('donor.direction', [
-            'to' => $to
         ]);
     }
 }

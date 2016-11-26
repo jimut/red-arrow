@@ -26,10 +26,6 @@ Route::get('notification', [
     'as' => 'donor.notification',
     'uses' => 'DonorController@showNotification'
 ]);
-Route::get('direction', [
-    'as' => 'donor.direction',
-    'uses' => 'DonorController@showDirection'
-]);
 
 Route::post('appointment', [
     'as' => 'appointment.store',
