@@ -17,7 +17,7 @@ require('bootstrap-sass');
  * extraordinarily expressive, readable, and quick to develop.
  */
 
-window.angular = require('angular');
+// window.angular = require('angular');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

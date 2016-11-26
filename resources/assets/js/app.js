@@ -7,9 +7,9 @@
 
 require('./bootstrap');
 
-angular.module('RedArrow', []);
-angular.module('RedArrow')
-    .controller('DirectionController', require('./controllers/direction.controller'));
+// angular.module('RedArrow', []);
+// angular.module('RedArrow')
+//     .controller('DirectionController', require('./controllers/direction.controller'));
 
 window.initMap = function () {
     document.dispatchEvent(new Event('mapinit'));
