@@ -82,15 +82,15 @@
                             <label for="blood-type" class="col-md-4 control-label">Blood Type</label>
 
                             <div class="col-md-6">
-                                <select id="blood_type" value="{{ $donor->blood_type }}" class="form-control" name="blood_type" required>
-                                    <option>A+</option>
-                                    <option>A-</option>
-                                    <option>B+</option>
-                                    <option>B-</option>
-                                    <option>AB+</option>
-                                    <option>AB-</option>
-                                    <option>O+</option>
-                                    <option>O-</option>
+                                <select id="blood_type" class="form-control" name="blood_type" required>
+                                    <option {{ $donor->blood_type == 'A+'  ? 'selected':'' }}>A+</option>
+                                    <option {{ $donor->blood_type == 'A-'  ? 'selected':'' }}>A-</option>
+                                    <option {{ $donor->blood_type == 'B+'  ? 'selected':'' }}>B+</option>
+                                    <option {{ $donor->blood_type == 'B-'  ? 'selected':'' }}>B-</option>
+                                    <option {{ $donor->blood_type == 'AB+' ? 'selected':'' }}>AB+</option>
+                                    <option {{ $donor->blood_type == 'AB-' ? 'selected':'' }}>AB-</option>
+                                    <option {{ $donor->blood_type == 'O+'  ? 'selected':'' }}>O+</option>
+                                    <option {{ $donor->blood_type == 'O-'  ? 'selected':'' }}>O-</option>
                                 </select>
 
                                 @if ($errors->has('blood_type'))
@@ -105,7 +105,7 @@
                             <label for="health_issues" class="col-md-4 control-label">Health Issues</label>
 
                             <div class="col-md-6">
-                                <textarea id="health_issues" class="form-control" name="health_issues" value="{{ $donor->health_issues }}"></textarea>
+                                <textarea id="health_issues" class="form-control" name="health_issues">{{ $donor->health_issues }}</textarea>
 
                                 @if ($errors->has('health_issues'))
                                     <span class="help-block">
