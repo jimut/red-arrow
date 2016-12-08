@@ -17,5 +17,23 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::resource('donor', 'API\DonorController');
-Route::resource('hospital', 'API\HospitalController');
+Route::get('notification', 'API\DonorController@showNotification');
+Route::resource('donor', 'API\DonorController', ['names' => [
+    'index'   => 'api.donor.index',
+    'show'    => 'api.donor.show',
+    'create'  => 'api.donor.create',
+    'store'   => 'api.donor.store',
+    'edit'    => 'api.donor.edit',
+    'update'  => 'api.donor.update',
+    'destroy' => 'api.donor.destroy'
+]]);
+Route::resource('hospital', 'API\HospitalController', ['names' => [
+    'index'   => 'api.hospital.index',
+    'show'    => 'api.hospital.show',
+    'create'  => 'api.hospital.create',
+    'store'   => 'api.hospital.store',
+    'edit'    => 'api.hospital.edit',
+    'update'  => 'api.hospital.update',
+    'destroy' => 'api.hospital.destroy'
+]]);
+Route::post('appointment', 'API\AppointmentController@store');
