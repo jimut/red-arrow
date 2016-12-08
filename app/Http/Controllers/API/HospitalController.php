@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Auth;
 use App\Hospital;
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class HospitalController extends Controller
 {
@@ -22,10 +23,10 @@ class HospitalController extends Controller
         'map_lat' => 'required',
         'map_lng' => 'required',
     ];
-
+    
     public function __construct()
     {
-        $this->middleware('auth', ['except' => [
+        $this->middleware('auth:api', ['except' => [
             'index', 'show'
         ]]);
     }
@@ -37,7 +38,9 @@ class HospitalController extends Controller
      */
     public function index()
     {
-        //
+        $hospitals = Hospital::all();
+
+        return response()->json($hospitals);
     }
 
     /**
@@ -47,10 +50,7 @@ class HospitalController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->donor)
-            abort(403);
-
-        return view('hospital.create');
+        //
     }
 
     /**
@@ -77,7 +77,10 @@ class HospitalController extends Controller
         $hospital->user_id = $request->user()->id;
         $hospital->save();
 
-        return redirect()->route('hospital.show', [$hospital]);
+        return response()->json([
+            'success' => true,
+            'hospital' => $hopital
+        ]);
     }
 
     /**
@@ -88,11 +91,9 @@ class HospitalController extends Controller
      */
     public function show($id)
     {
-        $hospital = Hospital::find($id);
+        $hospital = Hospital::findOrFail($id);
 
-        return view('hospital.show', [
-            'hospital' => $hospital
-        ]);
+        return response()->json($hospital);
     }
 
     /**
@@ -103,11 +104,7 @@ class HospitalController extends Controller
      */
     public function edit($id)
     {
-        $hospital = Hospital::find($id);
-
-        return view('hospital.edit', [
-            'hospital' => $hospital
-        ]);
+        //
     }
 
     /**
@@ -131,7 +128,10 @@ class HospitalController extends Controller
         $hospital->map_lng = $request->map_lng;
         $hospital->save();
 
-        return redirect()->route('hospital.show', [$hospital]);
+        return response()->json([
+            'success' => true,
+            'hospital' => $hopital
+        ]);
     }
 
     /**

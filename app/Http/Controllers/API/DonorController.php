@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Auth;
 use App\Donor;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class DonorController extends Controller
 {
@@ -26,7 +26,7 @@ class DonorController extends Controller
     ];
 
     public function __constructor(){
-        $this->middleware('auth', ['except' => [
+        $this->middleware('auth:api', ['except' => [
             'index', 'show'
         ]]);
     }
@@ -36,13 +36,11 @@ class DonorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $donors = Donor::all();
 
-        if ($request->ajax()) {
-            return response()->json($donors->toArray());
-        }
+        return response()->json($donors);
     }
 
     /**
@@ -52,10 +50,7 @@ class DonorController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->hospital)
-            abort(403);
-
-        return view('donor.create');
+        //
     }
 
     /**
@@ -84,7 +79,10 @@ class DonorController extends Controller
         $donor->user_id = $request->user()->id;
         $donor->save();
 
-        return redirect()->route('donor.show',[$donor]);
+        return response()->json([
+            'success' => true,
+            'donor' => $donor
+        ]);
     }
 
     /**
@@ -95,11 +93,9 @@ class DonorController extends Controller
      */
     public function show($id)
     {
-        $donor = Donor::find($id);
+        $donor = Donor::findOrFail($id);
 
-        return view('donor.show',[
-            'donor' => $donor,
-        ]);
+        return response()->json($donor);
     }
 
     /**
@@ -110,11 +106,7 @@ class DonorController extends Controller
      */
     public function edit($id)
     {
-        $donor = Donor::find($id);
-
-        return view('donor.edit', [
-            'donor' => $donor,
-        ]);
+        //
     }
 
     /**
@@ -140,7 +132,10 @@ class DonorController extends Controller
         $donor->health_issues = $request->health_issues;
         $donor->save();
 
-        return redirect()->route('donor.show', [$donor]);
+        return response()->json([
+            'success' => true,
+            'donor' => $donor
+        ]);
     }
 
     /**
@@ -152,40 +147,5 @@ class DonorController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * Find donors
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function find() {
-        return view('donor.find');
-    }
-
-    /**
-     * Show notifications of current user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showNotification()
-    {
-        $user = Auth::user();
-
-        if (!$user->donor)
-            abort(403);
-
-        $appointments = $user->donor->appointments;
-        $newNotifications = [];
-        foreach ($appointments as $appointment) {
-            if ($appointment->status === 'SENT') {
-                $newNotifications[] = $appointment;
-            }
-        }
-
-        return view('donor.notification', [
-            'newNotifications' => $newNotifications,
-            'donor' => $user->donor
-        ]);
     }
 }
