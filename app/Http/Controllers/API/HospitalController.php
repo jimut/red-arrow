@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Auth;
+use Validator;
 use App\Hospital;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -64,7 +65,12 @@ class HospitalController extends Controller
         if (Auth::user()->donor)
             abort(403);
 
-        $this->validate($request, $this->rules);
+        $validator = Validator::make($request->all(), $this->rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false
+            ]);
+        }
 
         $hospital = new Hospital;
         $hospital->avatar = 'default.png';
@@ -116,7 +122,12 @@ class HospitalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+        $validator = Validator::make($request->all(), $this->rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false
+            ]);
+        }
 
         $hospital = Hospital::find($id);
         $hospital->avatar = 'default.png';

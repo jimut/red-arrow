@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Auth;
+use Validator;
 use App\Donor;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -25,7 +26,7 @@ class DonorController extends Controller
         'blood_type' => 'required',
     ];
 
-    public function __constructor(){
+    public function __construct(){
         $this->middleware('auth:api', ['except' => [
             'index', 'show'
         ]]);
@@ -64,7 +65,12 @@ class DonorController extends Controller
         if (Auth::user()->hospital)
             abort(403);
 
-        $this->validate($request, $this->rules);
+        $validator = Validator::make($request->all(), $this->rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false
+            ]);
+        }
 
         $donor = new Donor;
         $donor->avatar = 'default.png';
@@ -118,7 +124,12 @@ class DonorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,$this->rules);
+        $validator = Validator::make($request->all(), $this->rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false
+            ]);
+        }
 
         $donor = Donor::find($id);
         $donor->avatar = 'default.png';
