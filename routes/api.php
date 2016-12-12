@@ -14,7 +14,10 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    $user = $request->user();
+    $user->hospital;
+    $user->donor;
+    return $user->toArray();
 })->middleware('auth:api');
 
 Route::get('notification', 'API\DonorController@showNotification');
