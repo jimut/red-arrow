@@ -41,7 +41,10 @@ class DonorController extends Controller
     {
         $donors = Donor::all();
 
-        return response()->json($donors);
+        return response()->json([
+            'count'  => count($donors),
+            'donors' => $donors
+        ]);
     }
 
     /**

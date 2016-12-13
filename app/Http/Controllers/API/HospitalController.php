@@ -41,7 +41,10 @@ class HospitalController extends Controller
     {
         $hospitals = Hospital::all();
 
-        return response()->json($hospitals);
+        return response()->json([
+            'count'     => count($hospitals),
+            'hospitals' => $hospitals
+        ]);
     }
 
     /**
