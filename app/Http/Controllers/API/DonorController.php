@@ -65,8 +65,11 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->hospital)
-            abort(403);
+        if ($request->user()->hospital) {
+            return response()->json([
+                'success' => false
+            ]);
+        }
 
         $validator = Validator::make($request->all(), $this->rules);
         if ($validator->fails()) {
@@ -168,12 +171,15 @@ class DonorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showNotification()
+    public function showNotification(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
-        if (!$user->donor)
-            abort(403);
+        if (!$user->donor) {
+            return response()->json([
+                'success' => false
+            ]);
+        }
 
         $appointments = $user->donor->appointments;
         $newNotifications = [];

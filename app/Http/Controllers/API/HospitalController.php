@@ -65,8 +65,11 @@ class HospitalController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->donor)
-            abort(403);
+        if ($request->user()->donor) {
+            return response()->json([
+                'success' => false
+            ]);
+        }
 
         $validator = Validator::make($request->all(), $this->rules);
         if ($validator->fails()) {
@@ -88,7 +91,7 @@ class HospitalController extends Controller
 
         return response()->json([
             'success' => true,
-            'hospital' => $hopital
+            'hospital' => $hospital
         ]);
     }
 

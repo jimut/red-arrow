@@ -10,6 +10,11 @@ use App\Http\Controllers\Controller;
 
 class AppointmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -18,6 +23,12 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->user()->donor) {
+            return response()->json([
+                'success' => false
+            ]);
+        }
+
         $appointment = new Appointment;
         $appointment->donor_id = $request->donor_id;
         $appointment->hospital_id = $request->user()->hospital->id;
