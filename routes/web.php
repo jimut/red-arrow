@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('auth/{provider}', 'Auth\SocialAuthController@redirect');
+Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@callback');
 Auth::routes();
 
 Route::resource('donor', 'DonorController');
