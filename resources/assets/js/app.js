@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('./fcmNotification');
 
 // angular.module('RedArrow', []);
 // angular.module('RedArrow')

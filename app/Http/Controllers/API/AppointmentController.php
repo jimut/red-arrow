@@ -35,6 +35,8 @@ class AppointmentController extends Controller
         $appointment->status = Appointment::SENT;
         $appointment->save();
 
+        event(new AppointmentCreated($appointment));
+
         return response()->json([
             'success' => true,
             'appointment' => $appointment

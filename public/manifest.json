@@ -1,0 +1,7 @@
+{
+  "name": "Red Arrow",
+  "short_name": "Red Arrow",
+  "start_url": "/index.php",
+  "display": "standalone",
+  "orientation": "portrait"
+}
