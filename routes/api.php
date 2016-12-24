@@ -20,6 +20,9 @@ Route::get('/user', function (Request $request) {
     return $user->toArray();
 })->middleware('auth:api');
 
+Route::get('/fcm/register/{token}', 'API\FCMTokenController@register');
+Route::get('/fcm/revoke/{token}', 'API\FCMTokenController@revoke');
+
 Route::get('notification', 'API\DonorController@showNotification');
 Route::resource('donor', 'API\DonorController', ['names' => [
     'index'   => 'api.donor.index',
