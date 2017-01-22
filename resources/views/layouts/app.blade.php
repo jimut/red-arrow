@@ -29,7 +29,7 @@
     <meta name="theme-color" content="#2F3BA2">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">    
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -103,7 +103,7 @@
     <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase-messaging.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIO4lZGXUhTkuxgNUgda6_JeMXBKgegok&libraries=places,geometry&callback=initMap"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIO4lZGXUhTkuxgNUgda6_JeMXBKgegok&libraries=places,geometry&callback=initMap"></script>
     <script src="/js/app.js"></script>
 </body>
 </html>
