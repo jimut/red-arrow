@@ -15,6 +15,7 @@ messaging.requestPermission()
 }).then(function (token) {
     window.Laravel.fcmToken = token;
     attachFCMTokenToLoginForm();
+    attachFCMTokenToSocialLoginLinks();
 }).catch(function (err) {
     console.log('Error Occured: ', err);
 });
@@ -31,5 +32,22 @@ function attachFCMTokenToLoginForm () {
         input.setAttribute('name', 'fcm_token');
         input.setAttribute('value', window.Laravel.fcmToken);
         form.appendChild(input);
+    }
+}
+
+function attachFCMTokenToSocialLoginLinks () {
+    if ((window.location.pathname.startsWith('/login') || window.location.pathname.startsWith('/register')) && window.Laravel.fcmToken) {
+        let facebookLoginLink = document.getElementById('facebook-login-link');
+        let googleLoginLink = document.getElementById('google-login-link');
+
+        if (facebookLoginLink) {
+            let href = facebookLoginLink.getAttribute('href') + '?fcm_token=' + window.Laravel.fcmToken;
+            facebookLoginLink.setAttribute('href', href);
+        }
+
+        if (googleLoginLink) {
+            let href = googleLoginLink.getAttribute('href') + '?fcm_token=' + window.Laravel.fcmToken;
+            googleLoginLink.setAttribute('href', href);
+        }
     }
 }

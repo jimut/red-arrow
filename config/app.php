@@ -170,6 +170,8 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
 
+        Barryvdh\Debugbar\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -228,6 +230,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'FCM' => LaravelFCM\Facades\FCM::class,
+
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

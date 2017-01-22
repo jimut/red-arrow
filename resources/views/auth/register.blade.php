@@ -76,15 +76,15 @@
                     </form>
 
                     <hr>
-                    
+
                     <div class="row">
-                        <div class="col-md-6 col-md-offset-4">                            
-                            <a href="{{ url('auth/facebook') }}" class="btn btn-primary">Sign In With Facebook</a>
+                        <div class="col-md-6 col-md-offset-4">
+                            <a href="{{ url('auth/facebook') }}" id="facebook-login-link" class="btn btn-primary">Sign In With Facebook</a>
 
                             <div style="margin-bottom: 15px;"></div>
 
-                            <a href="{{ url('auth/google') }}" class="btn btn-primary">Sign In With Google</a>
-                        </div> 
+                            <a href="{{ url('auth/google') }}" id="google-login-link" class="btn btn-primary">Sign In With Google</a>
+                        </div>
                     </div>
                 </div>
             </div>
