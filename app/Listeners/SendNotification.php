@@ -31,9 +31,9 @@ class SendNotification
      */
     public function handle(AppointmentCreated $event)
     {
-        $user = $event->appointment->donor()->user;
-        $hospital = $event->appointment->hospital();
-        
+        $user = $event->appointment->donor->user;
+        $hospital = $event->appointment->hospital;
+
         $title = 'Blood Required: ' . $hospital->name;
         $body = 'There is an urgent requirement of your blood type in this hospital. Someone\'s life is depending on you.';
 

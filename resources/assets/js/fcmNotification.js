@@ -13,7 +13,8 @@ messaging.requestPermission()
 .then(function () {
     return messaging.getToken();
 }).then(function (token) {
-    window.fcmToken = token;
+    window.Laravel.fcmToken = token;
+    attachFCMTokenToLoginForm();
 }).catch(function (err) {
     console.log('Error Occured: ', err);
 });
@@ -21,3 +22,14 @@ messaging.requestPermission()
 messaging.onMessage(function (payload) {
     console.log('onMessage: ', payload);
 });
+
+function attachFCMTokenToLoginForm () {
+    if (window.location.pathname.startsWith('/login') && window.Laravel.fcmToken && document.querySelector('form')) {
+        let form = document.querySelector('form');
+        let input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'fcm_token');
+        input.setAttribute('value', window.Laravel.fcmToken);
+        form.appendChild(input);
+    }
+}

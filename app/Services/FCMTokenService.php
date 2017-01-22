@@ -18,7 +18,7 @@ class FCMTokenService
         if (!$user) {
             return $this->fcmTokenRepo->storeIndependentToken($token);
         }
-        
+
         $fcmToken = $this->fcmTokenRepo->getByToken($token);
 
         if (!$fcmToken) {
@@ -27,14 +27,16 @@ class FCMTokenService
 
         if ($fcmToken->user_id !== $user->id) {
             return $this->fcmTokenRepo->updateByToken($token, $user);
-        } 
-        
+        }
+
         return true;
     }
 
-    public function revokeToken($token, $user = null) 
+    public function revokeToken($token, $user = null)
     {
         $fcmToken = $this->fcmTokenRepo->getByToken($token);
+
+        if (!$fcmToken) return;
 
         if (!$user && !$fcmToken->user_id) {
             $this->fcmTokenRepo->deleteToken($token);
