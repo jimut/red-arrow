@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ secure_url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -79,11 +79,11 @@
 
                     <div class="row">
                         <div class="col-md-6 col-md-offset-4">
-                            <a href="{{ secure_url('auth/facebook') }}" id="facebook-login-link" class="btn btn-primary">Sign In With Facebook</a>
+                            <a href="{{ url('auth/facebook') }}" id="facebook-login-link" class="btn btn-primary">Sign In With Facebook</a>
 
                             <div style="margin-bottom: 15px;"></div>
 
-                            <a href="{{ secure_url('auth/google') }}" id="google-login-link" class="btn btn-primary">Sign In With Google</a>
+                            <a href="{{ url('auth/google') }}" id="google-login-link" class="btn btn-primary">Sign In With Google</a>
                         </div>
                     </div>
                 </div>
