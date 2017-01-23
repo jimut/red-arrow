@@ -15,7 +15,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('auth/activate/{token}', [
     'as' => 'user.activate',
-    'uses' => 'Auth\ActivationController@activate'    
+    'uses' => 'Auth\ActivationController@activate'
 ]);
 Route::get('auth/{provider}', 'Auth\SocialAuthController@redirect');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@callback');
