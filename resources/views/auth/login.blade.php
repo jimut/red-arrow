@@ -62,7 +62,7 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" disabled>
                                     Login
                                 </button>
 
@@ -77,11 +77,11 @@
 
                     <div class="row">
                         <div class="col-md-6 col-md-offset-4">
-                            <a href="{{ url('auth/facebook') }}" id="facebook-login-link" class="btn btn-primary">Sign In With Facebook</a>
+                            <a href="{{ url('auth/facebook') }}" id="facebook-login-link" class="btn btn-primary" disabled>Sign In With Facebook</a>
 
                             <div style="margin-bottom: 15px;"></div>
 
-                            <a href="{{ url('auth/google') }}" id="google-login-link" class="btn btn-primary">Sign In With Google</a>
+                            <a href="{{ url('auth/google') }}" id="google-login-link" class="btn btn-primary" disabled>Sign In With Google</a>
                         </div>
                     </div>
                 </div>

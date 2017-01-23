@@ -32,6 +32,7 @@ function attachFCMTokenToLoginForm () {
         input.setAttribute('name', 'fcm_token');
         input.setAttribute('value', window.Laravel.fcmToken);
         form.appendChild(input);
+        document.querySelector('form button[type="submit"]').removeAttribute('disabled');
     }
 }
 
@@ -43,11 +44,13 @@ function attachFCMTokenToSocialLoginLinks () {
         if (facebookLoginLink) {
             let href = facebookLoginLink.getAttribute('href') + '?fcm_token=' + window.Laravel.fcmToken;
             facebookLoginLink.setAttribute('href', href);
+            facebookLoginLink.removeAttribute('disabled');
         }
 
         if (googleLoginLink) {
             let href = googleLoginLink.getAttribute('href') + '?fcm_token=' + window.Laravel.fcmToken;
             googleLoginLink.setAttribute('href', href);
+            googleLoginLink.removeAttribute('disabled');
         }
     }
 }
