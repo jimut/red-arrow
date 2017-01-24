@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 
 use App\Appointment;
+use App\Events\AppointmentCreated;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
