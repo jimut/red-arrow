@@ -44,6 +44,8 @@ class SendNotification
         $notification = $notificationBuilder->build();
         $tokens = $this->fcmTokenRepo->getByUser($user)->pluck('token')->all();
 
+        if (empty($tokens)) return;
+
         $response = FCM::sendTo($tokens, null, $notification);
 
         $expiredTokens = $response->tokensToDelete();
