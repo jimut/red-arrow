@@ -185,6 +185,8 @@ class DonorController extends Controller
         $newNotifications = [];
         foreach ($appointments as $appointment) {
             if ($appointment->status === 'SENT') {
+                $appointment->donor;
+                $appointment->hospital;
                 $newNotifications[] = $appointment;
             }
         }
