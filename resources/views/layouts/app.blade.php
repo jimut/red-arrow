@@ -80,6 +80,12 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
+                                    @if (Auth::user()->donor)
+                                        <a href="{{ url('donor/' . Auth::user()->donor->id) }}">View Profile</a>
+                                    @elseif (Auth::user()->hospital)
+                                        <a href="{{ url('hospital/' . Auth::user()->hospital->id) }}">View Profile</a>
+                                    @endif
+
                                     <a href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
