@@ -5,12 +5,14 @@ namespace App\Http\Controllers\API;
 use Auth;
 use Validator;
 use App\Hospital;
-use App\Http\Requests;
+use App\Services\ImageStorageService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class HospitalController extends Controller
 {
+    protected $imageStorageService;
+
     /**
      * Validation rules for hospital model
      *
@@ -24,12 +26,14 @@ class HospitalController extends Controller
         'map_lat' => 'required',
         'map_lng' => 'required',
     ];
-    
-    public function __construct()
+
+    public function __construct(ImageStorageService $imageStorageService)
     {
-        $this->middleware('auth:api', ['except' => [
+        $this->middleware('auth', ['except' => [
             'index', 'show'
         ]]);
+
+        $this->imageStorageService = $imageStorageService;
     }
 
     /**
@@ -79,7 +83,11 @@ class HospitalController extends Controller
         }
 
         $hospital = new Hospital;
-        $hospital->avatar = 'default.png';
+
+        if ($request->hasFile('avatar')) {
+            $hospital->avatar = $this->imageStorageService->storeAvatar($request->file('avatar'));
+        }
+
         $hospital->name = $request->name;
         $hospital->reg_no = $request->reg_no;
         $hospital->contact_no = $request->contact_no;
@@ -136,7 +144,11 @@ class HospitalController extends Controller
         }
 
         $hospital = Hospital::find($id);
-        $hospital->avatar = 'default.png';
+        
+        if ($request->hasFile('avatar')) {
+            $hospital->avatar = $this->imageStorageService->storeAvatar($request->file('avatar'));
+        }
+
         $hospital->name = $request->name;
         $hospital->reg_no = $request->reg_no;
         $hospital->contact_no = $request->contact_no;

@@ -9,10 +9,19 @@
                 <div class="panel-heading">Register as a Donor</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" action="{{ route('donor.update', $donor->id) }}" method="POST">
+                    <form class="form-horizontal" action="{{ route('donor.update', $donor->id) }}" method="POST" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
+
+                        <div class="form-group">
+                            <label for="avatar" class="col-md-4 control-label">Avatar</label>
+
+                            <div class="col-md-6 avatar-chooser">
+                                <img src="{{ url('imagecache/avatar/' . $donor->avatar) }}" alt="avatar" class="avatar-box">
+                                <input id="avatar" type="file" class="form-control" name="avatar" accept="image/*">
+                            </div>
+                        </div>
 
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Donor Name</label>
@@ -42,6 +51,13 @@
                                 @endif
                             </div>
                         </div>
+                        
+                        <div class="form-group">
+                            <div id="address-input-map"></div>
+                            <input id="pac-input" type="text" class="map-control" placeholder="Search...">
+                            <input id="map_lat" type="hidden" name="map_lat" value="{{ $donor->map_lat }}">
+                            <input id="map_lng" type="hidden" name="map_lng" value="{{ $donor->map_lng }}">
+                        </div>
 
                         <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
                             <label for="address" class="col-md-4 control-label">Address</label>
@@ -55,13 +71,6 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div id="address-input-map"></div>
-                            <input id="pac-input" type="text" class="map-control" placeholder="Search...">
-                            <input id="map_lat" type="hidden" name="map_lat" value="{{ $donor->map_lat }}">
-                            <input id="map_lng" type="hidden" name="map_lng" value="{{ $donor->map_lng }}">
                         </div>
 
                         <div class="form-group {{ $errors->has('contact_no') ? 'has-error' : '' }}">

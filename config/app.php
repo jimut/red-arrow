@@ -169,6 +169,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
 
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'FCM' => LaravelFCM\Facades\FCM::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 

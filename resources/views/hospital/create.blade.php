@@ -9,9 +9,18 @@
                 <div class="panel-heading">Register as a Hospital</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('hospital.store') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('hospital.store') }}" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
+
+                        <div class="form-group">
+                            <label for="avatar" class="col-md-4 control-label">Avatar</label>
+
+                            <div class="col-md-6 avatar-chooser">
+                                <img src="{{ url('imagecache/avatar/default.png') }}" alt="avatar" class="avatar-box">
+                                <input id="avatar" type="file" class="form-control" name="avatar" accept="image/*">
+                            </div>
+                        </div>
 
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Hospital Name</label>
@@ -56,6 +65,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <div id="address-input-map"></div>
+                            <input id="pac-input" type="text" class="map-control" placeholder="Search...">
+                            <input id="map_lat" type="hidden" name="map_lat">
+                            <input id="map_lng" type="hidden" name="map_lng">
+                        </div>
+
                         <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
                             <label for="address" class="col-md-4 control-label">Address</label>
 
@@ -68,13 +84,6 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div id="address-input-map"></div>
-                            <input id="pac-input" type="text" class="map-control" placeholder="Search...">
-                            <input id="map_lat" type="hidden" name="map_lat">
-                            <input id="map_lng" type="hidden" name="map_lng">
                         </div>
 
                         <div class="form-group">

@@ -5795,4 +5795,21 @@ strong {
 #find-map {
   height: 100vh; }
 
+.avatar {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin-right: 5px; }
+
+.avatar-profile {
+  float: right;
+  border-radius: 50%;
+  margin-top: 22px; }
+
+.avatar-chooser {
+  display: -webkit-box;
+  display: flex; }
+  .avatar-chooser .avatar-box {
+    margin-right: 15px; }
+
 /*# sourceMappingURL=app.css.map */

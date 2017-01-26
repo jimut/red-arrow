@@ -4,7 +4,10 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-4">
+        <div class="col-md-2 col-md-offset-2">
+            <img src="{{ url('imagecache/avatar/' . $donor->avatar) }}" alt="avatar" class="avatar-profile">
+        </div>
+        <div class="col-md-8">
             <h1>{{ $donor->name }}</h1>
             <p>
                 <strong>Date of Birth:</strong> {{ $donor->dob }} <br>

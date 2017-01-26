@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Donor;
+use App\Services\ImageStorageService;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class DonorController extends Controller
 {
+    protected $imageStorageService;
+
     /**
     * Validation rules for hospital model
     *
@@ -25,10 +26,13 @@ class DonorController extends Controller
         'blood_type' => 'required',
     ];
 
-    public function __constructor(){
+    public function __construct(ImageStorageService $imageStorageService)
+    {
         $this->middleware('auth', ['except' => [
             'index', 'show'
         ]]);
+
+        $this->imageStorageService = $imageStorageService;
     }
 
     /**
@@ -72,7 +76,11 @@ class DonorController extends Controller
         $this->validate($request, $this->rules);
 
         $donor = new Donor;
-        $donor->avatar = 'default.png';
+        
+        if ($request->hasFile('avatar')) {
+            $donor->avatar = $this->imageStorageService->storeAvatar($request->file('avatar'));
+        }
+
         $donor->name = $request->name;
         $donor->dob = $request->dob;
         $donor->address = $request->address;
@@ -129,7 +137,11 @@ class DonorController extends Controller
         $this->validate($request,$this->rules);
 
         $donor = Donor::find($id);
-        $donor->avatar = 'default.png';
+
+        if ($request->hasFile('avatar')) {
+            $donor->avatar = $this->imageStorageService->storeAvatar($request->file('avatar'));
+        }
+
         $donor->name = $request->name;
         $donor->dob = $request->dob;
         $donor->address = $request->address;
