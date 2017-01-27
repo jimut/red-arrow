@@ -40,6 +40,7 @@ class SendNotification
         $notificationBuilder = new PayloadNotificationBuilder();
         $notificationBuilder->setTitle($title);
         $notificationBuilder->setBody($body);
+        $notificationBuilder->setSound('default');
 
         $notification = $notificationBuilder->build();
         $tokens = $this->fcmTokenRepo->getByUser($user)->pluck('token')->all();
