@@ -28,7 +28,7 @@ class DonorController extends Controller
 
     public function __construct(ImageStorageService $imageStorageService)
     {
-        $this->middleware('auth', ['except' => [
+        $this->middleware('auth:api', ['except' => [
             'index', 'show'
         ]]);
 

@@ -29,7 +29,7 @@ class HospitalController extends Controller
 
     public function __construct(ImageStorageService $imageStorageService)
     {
-        $this->middleware('auth', ['except' => [
+        $this->middleware('auth:api', ['except' => [
             'index', 'show'
         ]]);
 
@@ -144,7 +144,7 @@ class HospitalController extends Controller
         }
 
         $hospital = Hospital::find($id);
-        
+
         if ($request->hasFile('avatar')) {
             $hospital->avatar = $this->imageStorageService->storeAvatar($request->file('avatar'));
         }
