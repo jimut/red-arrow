@@ -50,7 +50,7 @@ class SendNotification
 
         $expiredTokens = $response->tokensToDelete();
         foreach ($expiredTokens as $expiredToken) {
-            $fcmTokenRepo->deleteToken($expiredToken);
+            $this->fcmTokenRepo->deleteToken($expiredToken);
         }
     }
 }
