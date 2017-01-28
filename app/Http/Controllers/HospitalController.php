@@ -19,7 +19,7 @@ class HospitalController extends Controller
     public $rules = [
         'name' => 'required',
         'reg_no' => 'required',
-        'contact_no' => 'required',
+        'contact_no' => 'required|digits:10',
         'address' => 'required',
         'map_lat' => 'required',
         'map_lng' => 'required',

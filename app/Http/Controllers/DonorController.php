@@ -18,12 +18,16 @@ class DonorController extends Controller
     */
     public $rules = [
         'name' => 'required',
-        'dob' => 'required',
+        'dob' => 'required|date|before:-18 years',
         'address' => 'required',
         'map_lat' => 'required',
         'map_lng' => 'required',
-        'contact_no' => 'required',
+        'contact_no' => 'required|digits:10',
         'blood_type' => 'required',
+    ];
+
+    public $messages = [
+        'dob.before' => 'Your age must be atleast 18 years',
     ];
 
     public function __construct(ImageStorageService $imageStorageService)
@@ -73,10 +77,10 @@ class DonorController extends Controller
         if (Auth::user()->hospital)
             abort(403);
 
-        $this->validate($request, $this->rules);
+        $this->validate($request, $this->rules, $this->messages);
 
         $donor = new Donor;
-        
+
         if ($request->hasFile('avatar')) {
             $donor->avatar = $this->imageStorageService->storeAvatar($request->file('avatar'));
         }
@@ -134,7 +138,7 @@ class DonorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,$this->rules);
+        $this->validate($request,$this->rules, $this->messages);
 
         $donor = Donor::find($id);
 
