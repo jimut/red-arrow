@@ -84,13 +84,24 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    @if (Auth::user()->donor)
-                                        <a href="{{ url('donor/' . Auth::user()->donor->id) }}">View Profile</a>
-                                    @elseif (Auth::user()->hospital)
-                                        <a href="{{ url('hospital/' . Auth::user()->hospital->id) }}">View Profile</a>
-                                    @endif
+                                @if (Auth::user()->donor)
+                                    <li><a href="{{ route('appointment.received') }}">Recieved Appointments</a></li>
+                                    <li><a href="{{ route('appointment.accepted') }}">Accepted Appointments</a></li>
+                                    <li><a href="{{ route('user.donation') }}">Donation History</a></li>
 
+                                    <li class="divider"></li>
+
+                                    <li><a href="{{ url('donor/' . Auth::user()->donor->id) }}">View Profile</a></li>
+                                @elseif (Auth::user()->hospital)
+                                    <li><a href="{{ route('appointment.sent') }}">Sent Appointments</a></li>
+                                    <li><a href="{{ route('appointment.accepted') }}">Accepted Appointments</a></li>
+                                    <li><a href="{{ route('appointment.approved') }}">Approved Appointments</a></li>
+
+                                    <li class="divider"></li>
+
+                                    <li><a href="{{ url('hospital/' . Auth::user()->hospital->id) }}">View Profile</a></li>
+                                @endif
+                                <li>
                                     <a href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">

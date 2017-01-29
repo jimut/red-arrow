@@ -5772,6 +5772,9 @@ button.close {
 strong {
   font-weight: 500; }
 
+.space-left {
+  margin-left: 15px; }
+
 #address-input-map {
   height: 400px; }
 

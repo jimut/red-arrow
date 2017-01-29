@@ -178,30 +178,4 @@ class DonorController extends Controller
     public function find() {
         return view('donor.find');
     }
-
-    /**
-     * Show notifications of current user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showNotification()
-    {
-        $user = Auth::user();
-
-        if (!$user->donor)
-            abort(403);
-
-        $appointments = $user->donor->appointments;
-        $newNotifications = [];
-        foreach ($appointments as $appointment) {
-            if ($appointment->status === 'SENT') {
-                $newNotifications[] = $appointment;
-            }
-        }
-
-        return view('donor.notification', [
-            'newNotifications' => $newNotifications,
-            'donor' => $user->donor
-        ]);
-    }
 }

@@ -11,7 +11,11 @@ class Appointment extends Model
     const COMPLETED = 'COMPLETED';
     const TIMED_OUT = 'TIMED_OUT';
     const BETRAYED = 'BETRAYED';
-        
+
+    protected $fillable = [
+        'hospital_id', 'donor_id', 'status'
+    ];
+
     public function donor()
     {
         return $this->belongsTo('App\Donor');
