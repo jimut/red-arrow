@@ -17,7 +17,11 @@
                                 <div class="row">
                                     <p class="col-md-6" style="font-size: 18px;">{{ $appointment->donor->name }}</p>
                                     <div class="col-md-6">
-                                        <a href="{{ route('appointment.review.create', $appointment) }}" class="btn btn-primary pull-right space-left">Write Review</a>
+                                        @if ($appointment->donor_review)
+                                            <a href="{{ route('appointment.review.show', $appointment) }}" class="btn btn-primary pull-right space-left">View Review</a>
+                                        @else
+                                            <a href="{{ route('appointment.review.create', $appointment) }}" class="btn btn-primary pull-right space-left">Write Review</a>
+                                        @endif
                                     </div>
                                 </div>
                             </li>

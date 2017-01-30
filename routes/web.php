@@ -70,6 +70,14 @@ Route::get('appointment/{appointment}/approve', [
 ]);
 
 // Review
+Route::get('appointment/{appointment}/review', [
+    'as' => 'appointment.review.show',
+    'uses' => 'ReviewController@show'
+]);
+Route::post('appointment/{appointment}/review', [
+    'as' => 'appointment.review.store',
+    'uses' => 'ReviewController@store'
+]);
 Route::get('appointment/{appointment}/review/create', [
     'as' => 'appointment.review.create',
     'uses' => 'ReviewController@create'

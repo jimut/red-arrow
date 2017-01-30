@@ -5775,6 +5775,9 @@ strong {
 .space-left {
   margin-left: 15px; }
 
+.space-bottom {
+  margin-bottom: 15px; }
+
 #address-input-map {
   height: 400px; }
 

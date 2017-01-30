@@ -13,7 +13,7 @@ class Appointment extends Model
     const BETRAYED = 'BETRAYED';
 
     protected $fillable = [
-        'hospital_id', 'donor_id', 'status'
+        'hospital_id', 'donor_id', 'status', 'donor_review'
     ];
 
     public function donor()
