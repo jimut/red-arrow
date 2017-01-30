@@ -2,6 +2,7 @@
 
 namespace App\Grant;
 
+use App\User;
 use App\SocialAccount;
 use Validator;
 use DateInterval;
@@ -49,7 +50,7 @@ class SocialGrant extends AbstractGrant
         return $responseType;
     }
 
-    protected function validateClient(ServerRequestInterface $request) 
+    protected function validateClient(ServerRequestInterface $request)
     {
         $passportBridgeClient = parent::validateClient($request);
 
@@ -76,9 +77,21 @@ class SocialGrant extends AbstractGrant
             throw OAuthServerException::invalidRequest('provider_user_id');
         }
 
+        $email = $this->getRequestParameter('email', $request);
+        if (is_null($email)) {
+            throw OAuthServerException::invalidRequest('email');
+        }
+
+        $name = $this->getRequestParameter('name', $request);
+        if (is_null($name)) {
+            throw OAuthServerException::invalidRequest('name');
+        }
+
         $user = $this->getUserEntityBySocialProviderCredentials(
-            $provider, 
-            $providerUserId
+            $provider,
+            $providerUserId,
+            $email,
+            $name
         );
         if ($user instanceof UserEntityInterface === false) {
             $this->getEmitter()->emit(new RequestEvent(RequestEvent::USER_AUTHENTICATION_FAILED, $request));
@@ -89,18 +102,33 @@ class SocialGrant extends AbstractGrant
         return $user;
     }
 
-    protected function getUserEntityBySocialProviderCredentials($provider, $providerUserId) 
+    protected function getUserEntityBySocialProviderCredentials($provider, $providerUserId, $email, $name)
     {
-        $socialAccount = SocialAccount::where([
-            'provider' => $provider,
-            'provider_user_id' => $providerUserId 
+        $account = SocialAccount::where([
+            ['provider', $provider],
+            ['provider_user_id', $providerUserId]
         ])->first();
 
-        $user = $socialAccount->user;
+        if ($account) {
+            return new PassportBridgeUser($account->user->getAuthIdentifier());
+        }
+
+        $account = new SocialAccount([
+            'provider' => $provider,
+            'provider_user_id' => $providerUserId
+        ]);
+
+        $user = User::where('email', $email)->first();
 
         if (!$user) {
-            return;
+            $user = User::create([
+                'email' => $email,
+                'name' => $name
+            ]);
         }
+
+        $account->user()->associate($user);
+        $account->save();
 
         return new PassportBridgeUser($user->getAuthIdentifier());
     }
