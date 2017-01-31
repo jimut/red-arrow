@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hospital extends Model
 {
+    protected $fillable = [
+        'avatar'
+    ];
+    
     /**
      * The attributes that should be visible in arrays.
      *

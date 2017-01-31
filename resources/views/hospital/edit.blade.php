@@ -18,7 +18,7 @@
                             <label for="avatar" class="col-md-4 control-label">Avatar</label>
 
                             <div class="col-md-6 avatar-chooser">
-                                <img src="{{ url('imagecache/avatar/' . $hospital->avatar) }}" alt="avatar" class="avatar-box">
+                                <img src="{{ $hospital->avatar }}" alt="avatar" class="avatar-box">
                                 <input id="avatar" type="file" class="form-control" name="avatar" accept="image/*">
                             </div>
                         </div>

@@ -18,7 +18,7 @@
                             <label for="avatar" class="col-md-4 control-label">Avatar</label>
 
                             <div class="col-md-6 avatar-chooser">
-                                <img src="{{ url('imagecache/avatar/' . $donor->avatar) }}" alt="avatar" class="avatar-box">
+                                <img src="{{ $donor->avatar }}" alt="avatar" class="avatar-box">
                                 <input id="avatar" type="file" class="form-control" name="avatar" accept="image/*">
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                 @endif
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <div id="address-input-map"></div>
                             <input id="pac-input" type="text" class="map-control" placeholder="Search...">

@@ -16,8 +16,9 @@ class SocialAccountService
         ])->first();
 
         if ($account) {
+            $this->updateAvatar($account->user, $providerUser->getAvatar());
             return $account->user;
-        } 
+        }
 
         $account = new SocialAccount([
             'provider' => $provider,
@@ -26,7 +27,7 @@ class SocialAccountService
 
         $user = User::where('email', $providerUser->getEmail())->first();
 
-        if (!$user) {            
+        if (!$user) {
             $user = User::create([
                 'email' => $providerUser->getEmail(),
                 'name' => $providerUser->getName()
@@ -36,6 +37,23 @@ class SocialAccountService
         $account->user()->associate($user);
         $account->save();
 
+        $this->updateAvatar($user, $providerUser->getAvatar());
+
         return $user;
+    }
+
+    private function updateAvatar($user, $avatar)
+    {
+        $defaultUrl = url('imagecache/avatar/default.png');
+
+        if ($user->hospital && $user->hospital->avatar === $defaultUrl) {
+            $user->hospital->update([
+                'avatar' => $avatar
+            ]);
+        } else if ($user->donor && $user->donor->avatar === $defaultUrl) {
+            $user->donor->update([
+                'avatar' => $avatar
+            ]);
+        }
     }
 }

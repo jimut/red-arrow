@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2 col-md-offset-2">
-            <img src="{{ url('imagecache/avatar/' . $hospital->avatar) }}" alt="avatar" class="avatar-profile">
+            <img src="{{ $hospital->avatar }}" alt="avatar" class="avatar-profile">
         </div>
         <div class="col-md-8">
             <h1>{{ $hospital->name }}</h1>
