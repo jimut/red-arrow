@@ -21,7 +21,10 @@
 
                     @if ($isUserDonor)
                         <p>You have {{ $notificationCount }} notifications</p>
-                        <a href="{{ route('appointment.received') }}" class="btn btn-primary">View Notifications</a>
+
+                        @if ($notificationCount > 0)
+                            <a href="{{ route('appointment.received') }}" class="btn btn-primary">View Notifications</a>
+                        @endif
                     @endif
                 </div>
             </div>

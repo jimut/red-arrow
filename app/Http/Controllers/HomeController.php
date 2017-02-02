@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Appointment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -41,12 +42,12 @@ class HomeController extends Controller
             $isUserRegistered = true;
             $isUserDonor = true;
 
-            $notificationCount = $user->donor->appointments->count();
+            $notificationCount = $user->donor->appointments->where('status', Appointment::SENT)->count();
         }
 
         if ($request->ajax()) {
             $userInformation = 'User is not registered';
-            
+
             if ($isUserHospital) {
                 $userInformation = $user->hospital->toArray();
             } else if ($isUserDonor) {
