@@ -64,6 +64,10 @@ Route::get('appointment/{appointment}/accept', [
     'as' => 'appointment.accept',
     'uses' => 'AppointmentController@accept'
 ]);
+Route::get('appointment/{appointment}/reject', [
+    'as' => 'appointment.reject',
+    'uses' => 'AppointmentController@reject'
+]);
 Route::get('appointment/{appointment}/approve', [
     'as' => 'appointment.approve',
     'uses' => 'AppointmentController@approve'

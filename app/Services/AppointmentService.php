@@ -36,6 +36,12 @@ class AppointmentService
         $appointment->save();
     }
 
+    public function rejectAppointment(Appointment $appointment)
+    {
+        $appointment->status = Appointment::REJECTED;
+        $appointment->save();
+    }
+
     public function approveAppointment(Appointment $appointment)
     {
         $appointment->status = Appointment::COMPLETED;

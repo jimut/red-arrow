@@ -16,6 +16,11 @@
                             <li class="list-group-item">
                                 <div class="row">
                                     <p class="col-md-6" style="font-size: 18px;">{{ $appointment->hospital->name }}</p>
+                                    <div class="col-md-6">
+                                        @if ($appointment->donor_review)
+                                            <a href="{{ route('appointment.review.show', $appointment) }}" class="btn btn-primary pull-right space-left">View Review</a>
+                                        @endif
+                                    </div>                                    
                                 </div>
                             </li>
                         @endforeach

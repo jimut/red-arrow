@@ -17,8 +17,9 @@
                                 <div class="row">
                                     <p class="col-md-6" style="font-size: 18px;">{{ $appointment->hospital->name }}</p>
                                     <div class="col-md-6">
+                                        <a href="{{ route('appointment.reject', $appointment) }}" class="btn btn-danger pull-right space-left">Reject</a>
                                         <a href="https://www.google.co.in/maps?saddr={{ Auth::user()->donor->map_lat }},{{ Auth::user()->donor->map_lng }}&daddr={{ $appointment->hospital->map_lat }},{{ $appointment->hospital->map_lng }}" target="_blank" class="btn btn-primary pull-right space-left">Show Directions</a>
-                                        <a href="{{ route('appointment.accept', $appointment) }}" class="btn btn-primary pull-right space-left">Accept Appointment</a>
+                                        <a href="{{ route('appointment.accept', $appointment) }}" class="btn btn-success pull-right space-left">Accept</a>
                                     </div>
                                 </div>
                             </li>

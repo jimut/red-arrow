@@ -37,7 +37,7 @@ class AppointmentController extends Controller
 
         $sent = $this->appointmentService->getVirginAppointments($request->user()->hospital);
 
-        return view('appointment.sent', [
+        return view('appointment.hospital.sent', [
             'sent' => $sent
         ]);
     }
@@ -48,7 +48,7 @@ class AppointmentController extends Controller
 
         $received = $this->appointmentService->getVirginAppointments($request->user()->donor);
 
-        return view('appointment.received', [
+        return view('appointment.donor.received', [
             'received' => $received
         ]);
     }
@@ -76,7 +76,7 @@ class AppointmentController extends Controller
 
         $approved = $this->appointmentService->getCompletedAppointments($request->user()->hospital);
 
-        return view('appointment.approved', [
+        return view('appointment.hospital.approved', [
             'approved' => $approved
         ]);
     }
@@ -92,6 +92,19 @@ class AppointmentController extends Controller
         $this->appointmentService->acceptAppointment($appointment);
 
         return redirect()->route('appointment.accepted');
+    }
+
+    public function reject(Request $request, $id)
+    {
+        $appointment = Appointment::find($id);
+
+        if ($request->user()->hospital) abort(403);
+
+        if ($request->user()->donor->id !== $appointment->donor_id) abort(403);
+
+        $this->appointmentService->rejectAppointment($appointment);
+
+        return redirect()->route('appointment.received');
     }
 
     public function approve(Request $request, $id)
