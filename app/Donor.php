@@ -35,6 +35,10 @@ class Donor extends Model
             return $attr;
         }
 
+        if ($attr === NULL) {
+            return url('imagecache/avatar/default.png');
+        }
+
         return url('imagecache/avatar/' . $attr);
     }
 }
