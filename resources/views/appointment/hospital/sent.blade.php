@@ -15,7 +15,7 @@
                         @foreach ($sent as $appointment)
                             <li class="list-group-item">
                                 <div class="row">
-                                    <p class="col-md-8" style="font-size: 18px;">{{ $appointment->hospital->name }}</p>
+                                    <p class="col-md-8" style="font-size: 18px;">{{ $appointment->donor->name }}</p>
                                     <div class="col-md-4"><a href="https://www.google.co.in/maps?saddr={{ $appointment->donor->map_lat }},{{ $appointment->donor->map_lng }}&daddr={{ $appointment->hospital->map_lat }},{{ $appointment->hospital->map_lng }}" target="_blank" class="btn btn-primary pull-right">Show Directions</a></div>
                                 </div>
                             </li>
