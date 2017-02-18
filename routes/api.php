@@ -28,7 +28,7 @@ Route::get('user/donation', [
 ]);
 
 // Donor
-Route::get('notification', 'API\DonorController@showNotification');
+Route::get('notification', 'API\AppointmentController@received');
 Route::resource('donor', 'API\DonorController', ['names' => [
     'index'   => 'api.donor.index',
     'show'    => 'api.donor.show',
