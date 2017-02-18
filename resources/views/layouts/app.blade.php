@@ -56,6 +56,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="/img/logo.png" alt="Brand">
                     Red Arrow
                 </a>
             </div>

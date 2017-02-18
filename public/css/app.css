@@ -5820,4 +5820,15 @@ strong {
   .avatar-chooser .avatar-box {
     margin-right: 15px; }
 
+.navbar-brand {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center; }
+  .navbar-brand img {
+    height: 100%;
+    margin-right: 10px;
+    position: relative;
+    top: -1px; }
+
 /*# sourceMappingURL=app.css.map */
