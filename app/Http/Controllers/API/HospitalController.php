@@ -69,7 +69,7 @@ class HospitalController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->user()->donor) {
+        if (Auth::user()->donor && Auth::user()->hospital) {
             return response()->json([
                 'success' => false
             ]);
@@ -144,6 +144,9 @@ class HospitalController extends Controller
         }
 
         $hospital = Hospital::find($id);
+
+        if (Auth::user()->id !== $hospital->user->id)
+            abort(403);
 
         if ($request->hasFile('avatar')) {
             $hospital->avatar = $this->imageStorageService->storeAvatar($request->file('avatar'));

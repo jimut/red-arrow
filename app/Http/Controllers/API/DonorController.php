@@ -26,6 +26,10 @@ class DonorController extends Controller
         'blood_type' => 'required',
     ];
 
+    public $messages = [
+        'dob.before' => 'Your age must be atleast 18 years',
+    ];
+
     public function __construct(ImageStorageService $imageStorageService)
     {
         $this->middleware('auth:api', ['except' => [
@@ -68,7 +72,7 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->user()->hospital) {
+        if (Auth::user()->hospital && Auth::user()->donor) {
             return response()->json([
                 'success' => false
             ]);
@@ -146,6 +150,9 @@ class DonorController extends Controller
 
         $donor = Donor::find($id);
 
+        if (Auth::user()->id !== $donor->user->id)
+            abort(403);
+
         if ($request->hasFile('avatar')) {
             $donor->avatar = $this->imageStorageService->storeAvatar($request->file('avatar'));
         }
@@ -175,36 +182,5 @@ class DonorController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * Show notifications of current user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showNotification(Request $request)
-    {
-        $user = $request->user();
-
-        if (!$user->donor) {
-            return response()->json([
-                'success' => false
-            ]);
-        }
-
-        $appointments = $user->donor->appointments;
-        $newNotifications = [];
-        foreach ($appointments as $appointment) {
-            if ($appointment->status === 'SENT') {
-                $appointment->donor;
-                $appointment->hospital;
-                $newNotifications[] = $appointment;
-            }
-        }
-
-        return response()->json([
-            'newNotifications' => $newNotifications,
-            'donor' => $user->donor
-        ]);
     }
 }

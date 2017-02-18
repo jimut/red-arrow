@@ -48,9 +48,7 @@ class DonorController extends Controller
     {
         $donors = Donor::all();
 
-        if ($request->ajax()) {
-            return response()->json($donors->toArray());
-        }
+        return response()->json($donors->toArray());
     }
 
     /**
@@ -60,7 +58,7 @@ class DonorController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->hospital)
+        if (Auth::user()->hospital && Auth::user()->donor)
             abort(403);
 
         return view('donor.create');
@@ -74,7 +72,7 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->hospital)
+        if (Auth::user()->hospital && Auth::user()->donor)
             abort(403);
 
         $this->validate($request, $this->rules, $this->messages);
@@ -124,6 +122,9 @@ class DonorController extends Controller
     {
         $donor = Donor::find($id);
 
+        if (Auth::user()->id !== $donor->user->id)
+            abort(403);
+
         return view('donor.edit', [
             'donor' => $donor,
         ]);
@@ -138,9 +139,12 @@ class DonorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,$this->rules, $this->messages);
+        $this->validate($request, $this->rules, $this->messages);
 
         $donor = Donor::find($id);
+
+        if (Auth::user()->id !== $donor->user->id)
+            abort(403);
 
         if ($request->hasFile('avatar')) {
             $donor->avatar = $this->imageStorageService->storeAvatar($request->file('avatar'));

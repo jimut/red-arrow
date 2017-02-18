@@ -51,7 +51,7 @@ class HospitalController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->donor)
+        if (Auth::user()->donor && Auth::user()->hospital)
             abort(403);
 
         return view('hospital.create');
@@ -65,7 +65,7 @@ class HospitalController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->donor)
+        if (Auth::user()->donor && Auth::user()->hospital)
             abort(403);
 
         $this->validate($request, $this->rules);
@@ -113,6 +113,9 @@ class HospitalController extends Controller
     {
         $hospital = Hospital::find($id);
 
+        if (Auth::user()->id !== $hospital->user->id)
+            abort(403);
+
         return view('hospital.edit', [
             'hospital' => $hospital
         ]);
@@ -130,6 +133,9 @@ class HospitalController extends Controller
         $this->validate($request, $this->rules);
 
         $hospital = Hospital::find($id);
+
+        if (Auth::user()->id !== $hospital->user->id)
+            abort(403);
 
         if ($request->hasFile('avatar')) {
             $hospital->avatar = $this->imageStorageService->storeAvatar($request->file('avatar'));
