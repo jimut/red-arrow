@@ -38,7 +38,7 @@ class AppointmentController extends Controller
     {
         if ($request->user()->donor) abort(403);
 
-        $sent = $this->appointmentService->getVirginAppointments($request->user()->hospital);
+        $sent = $this->appointmentService->getVirginAppointments($request->user()->hospital, true);
 
         return response()->json([
             'sent' => $sent
@@ -49,7 +49,7 @@ class AppointmentController extends Controller
     {
         if ($request->user()->hospital) abort(403);
 
-        $received = $this->appointmentService->getVirginAppointments($request->user()->donor);
+        $received = $this->appointmentService->getVirginAppointments($request->user()->donor, true);
 
         return response()->json([
             'received' => $received
@@ -60,7 +60,7 @@ class AppointmentController extends Controller
     {
         $appointee = $request->user()->hospital ?: $request->user()->donor;
 
-        $accepted = $this->appointmentService->getAcceptedAppointments($appointee);
+        $accepted = $this->appointmentService->getAcceptedAppointments($appointee, true);
 
         return response()->json([
             'accepted' => $accepted
@@ -71,7 +71,7 @@ class AppointmentController extends Controller
     {
         if ($request->user()->donor) abort(403);
 
-        $approved = $this->appointmentService->getCompletedAppointments($request->user()->hospital);
+        $approved = $this->appointmentService->getCompletedAppointments($request->user()->hospital, true);
 
         return response()->json([
             'approved' => $approved

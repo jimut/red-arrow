@@ -15,19 +15,19 @@ class AppointmentService
         ]);
     }
 
-    public function getVirginAppointments($appointee)
+    public function getVirginAppointments($appointee, $isExpanded = false)
     {
-        return $this->getAppointmentByStatus($appointee, Appointment::SENT);
+        return $this->getAppointmentByStatus($appointee, Appointment::SENT, $isExpanded);
     }
 
-    public function getAcceptedAppointments($appointee)
+    public function getAcceptedAppointments($appointee, $isExpanded = false)
     {
-        return $this->getAppointmentByStatus($appointee, Appointment::ACCEPTED);
+        return $this->getAppointmentByStatus($appointee, Appointment::ACCEPTED, $isExpanded);
     }
 
-    public function getCompletedAppointments($appointee)
+    public function getCompletedAppointments($appointee, $isExpanded = false)
     {
-        return $this->getAppointmentByStatus($appointee, Appointment::COMPLETED);
+        return $this->getAppointmentByStatus($appointee, Appointment::COMPLETED, $isExpanded);
     }
 
     public function acceptAppointment(Appointment $appointment)
@@ -48,13 +48,18 @@ class AppointmentService
         $appointment->save();
     }
 
-    private function getAppointmentByStatus($appointee, $status)
+    private function getAppointmentByStatus($appointee, $status, $isExpanded)
     {
         $appointments = $appointee->appointments;
         $picked = [];
 
         foreach ($appointments as $appointment) {
             if ($appointment->status === $status) {
+                if ($isExpanded) {
+                    $appointment->donor;
+                    $appointment->hospital;
+                }
+                
                 $picked[] = $appointment;
             }
         }
