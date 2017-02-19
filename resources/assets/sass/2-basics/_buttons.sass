@@ -1,0 +1,25 @@
+$color-facebook: #3b5998
+$color-google:   #dd4b39
+
+.btn-facebook
+  background-color: $color-facebook
+  border-color: darken($color-facebook, 15%)
+
+  &:hover, &:focus, &:active
+    background-color: darken($color-facebook, 10%)
+    border-color: darken($color-facebook, 15%)
+
+.btn-google
+  background-color: $color-google
+  border-color: darken($color-google, 15%)
+
+  &:hover, &:focus, &:active
+    background-color: darken($color-google, 10%)
+    border-color: darken($color-google, 15%)
+
+.btn-facebook .fa,
+.btn-google .fa
+  font-size: 18px
+  position: relative
+  top: 2px
+  margin-right: 12px
