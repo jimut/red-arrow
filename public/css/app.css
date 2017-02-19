@@ -5852,4 +5852,12 @@ strong {
     position: relative;
     top: -1px; }
 
+body {
+  background-color: red; }
+
+.panel-default {
+  border-style: dashed;
+  border-width: 5px;
+  border-color: #000; }
+
 /*# sourceMappingURL=app.css.map */
