@@ -30,6 +30,15 @@ class AppointmentService
         return $this->getAppointmentByStatus($appointee, Appointment::COMPLETED, $isExpanded);
     }
 
+    public function getCount($appointee)
+    {
+        return [
+            'virgin'    => $appointee->appointments->where('status', Appointment::SENT)->count(),
+            'accepted'  => $appointee->appointments->where('status', Appointment::ACCEPTED)->count(),
+            'completed' => $appointee->appointments->where('status', Appointment::COMPLETED)->count(),
+        ];
+    }
+
     public function acceptAppointment(Appointment $appointment)
     {
         $appointment->status = Appointment::ACCEPTED;
@@ -59,7 +68,7 @@ class AppointmentService
                     $appointment->donor;
                     $appointment->hospital;
                 }
-                
+
                 $picked[] = $appointment;
             }
         }

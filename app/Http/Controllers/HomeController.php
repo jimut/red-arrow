@@ -4,18 +4,23 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Appointment;
+use App\Services\AppointmentService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    protected $appointmentService;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(AppointmentService $appointmentService)
     {
         $this->middleware('auth');
+
+        $this->appointmentService = $appointmentService;
     }
 
     /**
@@ -28,45 +33,20 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        $isUserRegistered = false;
-        $isUserHospital = false;
-        $isUserDonor = false;
-        $notificationCount = 0;
-
         if ($user->hospital) {
-            $isUserRegistered = true;
-            $isUserHospital = true;
-        }
-
-        if ($user->donor) {
-            $isUserRegistered = true;
-            $isUserDonor = true;
-
-            $notificationCount = $user->donor->appointments->where('status', Appointment::SENT)->count();
-        }
-
-        if ($request->ajax()) {
-            $userInformation = 'User is not registered';
-
-            if ($isUserHospital) {
-                $userInformation = $user->hospital->toArray();
-            } else if ($isUserDonor) {
-                $userInformation = $user->donor->toArray();
-            }
-
-            return response()->json([
-                'isUserRegistered' => $isUserRegistered,
-                'isUserHospital' => $isUserHospital,
-                'isUserDonor' => $isUserDonor,
-                'userInformation' => $userInformation
+            return view('hospital.home', [
+                'hospital' => $user->hospital,
+                'count' => $this->appointmentService->getCount($user->hospital)
             ]);
         }
 
-        return view('home', [
-            'isUserRegistered' => $isUserRegistered,
-            'isUserHospital' => $isUserHospital,
-            'isUserDonor' => $isUserDonor,
-            'notificationCount' => $notificationCount,
-        ]);
+        if ($user->donor) {
+            return view('donor.home', [
+                'donor' => $user->donor,
+                'count' => $this->appointmentService->getCount($user->donor)
+            ]);
+        }
+
+        return view('home');
     }
 }

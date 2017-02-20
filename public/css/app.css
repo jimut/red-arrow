@@ -5781,14 +5781,14 @@ strong {
 .btn-facebook {
   background-color: #3b5998;
   border-color: #263961; }
-  .btn-facebook:hover, .btn-facebook:focus, .btn-facebook:active {
+  .btn-facebook:hover, .btn-facebook:focus, .btn-facebook:active, .btn-facebook:hover:active {
     background-color: #2d4373;
     border-color: #263961; }
 
 .btn-google {
   background-color: #dd4b39;
   border-color: #ac2d1e; }
-  .btn-google:hover, .btn-google:focus, .btn-google:active {
+  .btn-google:hover, .btn-google:focus, .btn-google:active, .btn-google:hover:active {
     background-color: #c23321;
     border-color: #ac2d1e; }
 
@@ -5798,6 +5798,29 @@ strong {
   position: relative;
   top: 2px;
   margin-right: 12px; }
+
+.flex-row {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row; }
+
+.flex-align-center-center {
+  -webkit-box-pack: center;
+  justify-content: center; }
+
+.flex-align-center-center {
+  -webkit-box-align: center;
+  align-items: center; }
+
+.flex-align-start-end {
+  -webkit-box-align: end;
+  align-items: flex-end; }
+
+.color-banner {
+  background-color: #EF5350;
+  height: 5px; }
 
 #address-input-map {
   height: 400px; }
@@ -5852,12 +5875,15 @@ strong {
     position: relative;
     top: -1px; }
 
-body {
-  background-color: red; }
+.count {
+  font-size: 88px;
+  line-height: 1.1em;
+  margin-right: 8px;
+  padding-bottom: 32px; }
 
-.panel-default {
-  border-style: dashed;
-  border-width: 5px;
-  border-color: #000; }
+.count-desc {
+  margin-bottom: 11px;
+  font-size: 16px;
+  line-height: 1.2em; }
 
 /*# sourceMappingURL=app.css.map */
