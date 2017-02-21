@@ -4,28 +4,30 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Notifications</div>
+                <h1>Received appointments</h1>
+                <p>These hospitals are requesting your blood type right now.</p>
+            </div>
+        </div>
 
-                    <div class="panel-body">
-                        <p>These hospitals are requesting your blood type right now.</p>
-                    </div>
+        <div class="divider-30"></div>
 
-                    <ul class="list-group">
-                        @foreach ($received as $appointment)
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <p class="col-md-6" style="font-size: 18px;">{{ $appointment->hospital->name }}</p>
-                                    <div class="col-md-6">
-                                        <a href="{{ route('appointment.reject', $appointment) }}" class="btn btn-danger pull-right space-left">Reject</a>
-                                        <a href="https://www.google.co.in/maps?saddr={{ Auth::user()->donor->map_lat }},{{ Auth::user()->donor->map_lng }}&daddr={{ $appointment->hospital->map_lat }},{{ $appointment->hospital->map_lng }}" target="_blank" class="btn btn-primary pull-right space-left">Show Directions</a>
-                                        <a href="{{ route('appointment.accept', $appointment) }}" class="btn btn-success pull-right space-left">Accept</a>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <ul class="list-group">
+                    @foreach ($received as $appointment)
+                        <li class="list-group-item flex-row">
+                            <div class="flex">
+                                <h4 class="list-group-item-heading">{{ $appointment->hospital->name }}</h4>
+                                <p class="list-group-item-text">{{ $appointment->hospital->address }}</p>
+                            </div>
+                            <div class="btn-group flex-no-shrink">
+                                <a href="{{ route('appointment.accept', $appointment) }}" class="btn btn-success">Accept</a>
+                                <a href="https://www.google.co.in/maps?saddr={{ Auth::user()->donor->map_lat }},{{ Auth::user()->donor->map_lng }}&daddr={{ $appointment->hospital->map_lat }},{{ $appointment->hospital->map_lng }}" target="_blank" class="btn btn-primary">Show Directions</a>
+                                <a href="{{ route('appointment.reject', $appointment) }}" class="btn btn-danger">Reject</a>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

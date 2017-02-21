@@ -4,26 +4,28 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Accepted Appointments</div>
+                <h1>Accepted appointments</h1>
+                <p>These people have accepted the appointment and are possibly coming.</p>
+            </div>
+        </div>
 
-                    <div class="panel-body">
-                        <p>These people have accepted the appointment and are possibly coming.</p>
-                    </div>
+        <div class="divider-30"></div>
 
-                    <ul class="list-group">
-                        @foreach ($accepted as $appointment)
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <p class="col-md-6" style="font-size: 18px;">{{ $appointment->donor->name }}</p>
-                                    <div class="col-md-6">
-                                        <a href="{{ route('appointment.approve', $appointment) }}" class="btn btn-primary pull-right">Approve</a>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <ul class="list-group">
+                    @foreach ($accepted as $appointment)
+                        <li class="list-group-item flex-row">
+                            <div class="flex">
+                                <h4 class="list-group-item-heading">{{ $appointment->donor->name }}</h4>
+                                <p class="list-group-item-text">{{ $appointment->donor->address }}</p>
+                            </div>
+                            <div>
+                                <a href="{{ route('appointment.approve', $appointment) }}" class="btn btn-primary">Approve</a>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

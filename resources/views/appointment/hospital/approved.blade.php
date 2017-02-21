@@ -4,30 +4,32 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Approved Appointments</div>
+                <h1>Approved appointments</h1>
+                <p>These donors are approved by you.</p>
+            </div>
+        </div>
 
-                    <div class="panel-body">
-                        <p>These donors are approved by you.</p>
-                    </div>
+        <div class="divider-30"></div>
 
-                    <ul class="list-group">
-                        @foreach ($approved as $appointment)
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <p class="col-md-6" style="font-size: 18px;">{{ $appointment->donor->name }}</p>
-                                    <div class="col-md-6">
-                                        @if ($appointment->donor_review)
-                                            <a href="{{ route('appointment.review.show', $appointment) }}" class="btn btn-primary pull-right space-left">View Review</a>
-                                        @else
-                                            <a href="{{ route('appointment.review.create', $appointment) }}" class="btn btn-primary pull-right space-left">Write Review</a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <ul class="list-group">
+                    @foreach ($approved as $appointment)
+                        <li class="list-group-item flex-row">
+                            <div class="flex">
+                                <h4 class="list-group-item-heading">{{ $appointment->donor->name }}</h4>
+                                <p class="list-group-item-text">{{ $appointment->donor->address }}</p>
+                            </div>
+                            <div>
+                                @if ($appointment->donor_review)
+                                    <a href="{{ route('appointment.review.show', $appointment) }}" class="btn btn-primary">View Review</a>
+                                @else
+                                    <a href="{{ route('appointment.review.create', $appointment) }}" class="btn btn-primary">Write Review</a>
+                                @endif
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

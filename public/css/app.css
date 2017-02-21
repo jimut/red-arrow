@@ -5778,6 +5778,12 @@ strong {
 .space-bottom {
   margin-bottom: 15px; }
 
+.divider-30 {
+  padding-top: 30px; }
+
+.divider-100 {
+  padding-top: 100px; }
+
 .btn-facebook {
   background-color: #3b5998;
   border-color: #263961; }
@@ -5817,6 +5823,14 @@ strong {
 .flex-align-start-end {
   -webkit-box-align: end;
   align-items: flex-end; }
+
+.flex {
+  -webkit-box-flex: 1;
+  flex: 1 1 auto; }
+
+.flex-no-shrink {
+  -webkit-box-flex: 0;
+  flex: 0 0 auto; }
 
 .color-banner {
   background-color: #EF5350;
