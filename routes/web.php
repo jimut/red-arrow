@@ -27,6 +27,7 @@ Route::get('user/donation', [
     'as' => 'user.donation',
     'uses' => 'UserController@donation'
 ]);
+Route::get('user', 'UserController@user');
 
 // Donor
 Route::get('find', [

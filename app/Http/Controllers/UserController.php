@@ -16,6 +16,16 @@ class UserController extends Controller
         $this->appointmentService = $appointmentService;
     }
 
+    public function user(Request $request)
+    {
+        $request->user()->donor;
+        $request->user()->hospital;
+        
+        return response()->json([
+            'user' => $request->user()
+        ]);
+    }
+
     public function donation(Request $request)
     {
         if ($request->user()->hospital) abort(403);

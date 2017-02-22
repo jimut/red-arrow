@@ -179,7 +179,10 @@ class DonorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function find() {
+    public function find(Request $request) {
+        if ($request->user()->donor)
+            abort(403);
+            
         return view('donor.find');
     }
 }

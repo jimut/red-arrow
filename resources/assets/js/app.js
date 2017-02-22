@@ -143,9 +143,12 @@ function initFindMap () {
         center: loc
     });
 
-    $.ajax('/', {
+    $.ajax('/user', {
         success: function (data) {
-            hospitalLoc = new google.maps.LatLng(data.userInformation.map_lat, data.userInformation.map_lng);
+            if (data.user.hospital === null)
+                return;
+
+            hospitalLoc = new google.maps.LatLng(data.user.hospital.map_lat, data.user.hospital.map_lng);
             map.setCenter(hospitalLoc);
             map.setZoom(14);
 
