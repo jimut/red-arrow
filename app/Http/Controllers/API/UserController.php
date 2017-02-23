@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         if ($request->user()->hospital) abort(403);
 
-        $completed = $this->appointmentService->getCompletedAppointments($request->user()->donor);
+        $completed = $this->appointmentService->getCompletedAppointments($request->user()->donor, true);
 
         return response()->json([
             'completed' => $completed
