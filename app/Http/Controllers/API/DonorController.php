@@ -72,7 +72,7 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->hospital && Auth::user()->donor) {
+        if (Auth::user()->hospital || Auth::user()->donor) {
             return response()->json([
                 'success' => false
             ]);

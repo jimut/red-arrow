@@ -69,7 +69,7 @@ class HospitalController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->donor && Auth::user()->hospital) {
+        if (Auth::user()->donor || Auth::user()->hospital) {
             return response()->json([
                 'success' => false
             ]);

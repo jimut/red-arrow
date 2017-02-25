@@ -51,7 +51,7 @@ class HospitalController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->donor && Auth::user()->hospital)
+        if (Auth::user()->donor || Auth::user()->hospital)
             abort(403);
 
         return view('hospital.create');
@@ -65,7 +65,7 @@ class HospitalController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->donor && Auth::user()->hospital)
+        if (Auth::user()->donor || Auth::user()->hospital)
             abort(403);
 
         $this->validate($request, $this->rules);

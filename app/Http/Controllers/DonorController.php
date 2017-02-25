@@ -58,7 +58,7 @@ class DonorController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->hospital && Auth::user()->donor)
+        if (Auth::user()->hospital || Auth::user()->donor)
             abort(403);
 
         return view('donor.create');
@@ -72,7 +72,7 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->hospital && Auth::user()->donor)
+        if (Auth::user()->hospital || Auth::user()->donor)
             abort(403);
 
         $this->validate($request, $this->rules, $this->messages);
@@ -182,7 +182,7 @@ class DonorController extends Controller
     public function find(Request $request) {
         if ($request->user()->donor)
             abort(403);
-            
+
         return view('donor.find');
     }
 }
