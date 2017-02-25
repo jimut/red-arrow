@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1>Accepted appointments</h1>
+                <h1>Sent appointments</h1>
                 <p>You sent notifications to these people.</p>
             </div>
         </div>
