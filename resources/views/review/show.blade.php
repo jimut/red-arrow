@@ -4,9 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Donation Review</div>
+                <h1>Donation review</h1>
 
+                <div class="divider-10"></div>
+
+                <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row space-bottom">
                             <div class="col-md-4 text-right"><strong>Donor Name</strong></div>
