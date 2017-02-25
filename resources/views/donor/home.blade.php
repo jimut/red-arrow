@@ -23,7 +23,7 @@
                         <strong>Blood Type:</strong> {{ $donor->blood_type }} <br>
                         <strong>Contact Number:</strong> {{ $donor->contact_no }} <br>
                     </p>
-                    <a href="{{ route('donor.edit', $donor->id) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ route('donor.edit', $donor->id) }}" class="btn btn-danger">Edit</a>
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
                         <div class="count">{{ $count['virgin'] }}</div>
                         <div>
                             <div class="count-desc">Recieved<br>appointments</div>
-                            <a href="{{ route('appointment.received') }}" class="btn btn-primary">View</a>
+                            <a href="{{ route('appointment.received') }}" class="btn btn-danger">View</a>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         <div class="count">{{ $count['accepted'] }}</div>
                         <div>
                             <div class="count-desc">Accepted<br>appointments</div>
-                            <a href="{{ route('appointment.accepted') }}" class="btn btn-primary">View</a>
+                            <a href="{{ route('appointment.accepted') }}" class="btn btn-danger">View</a>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         <div class="count">{{ $count['completed'] }}</div>
                         <div>
                             <div class="count-desc">Donation<br>history</div>
-                            <a href="{{ route('user.donation') }}" class="btn btn-primary">View</a>
+                            <a href="{{ route('user.donation') }}" class="btn btn-danger">View</a>
                         </div>
                     </div>
                 </div>

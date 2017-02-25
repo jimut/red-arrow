@@ -22,8 +22,8 @@
                         <strong>Contact Number:</strong> {{ $hospital->contact_no }} <br>
                         <strong>Address:</strong> {{ $hospital->address }}
                     </p>
-                    <a href="{{ route('hospital.edit', $hospital->id) }}" class="btn btn-primary">Edit</a>
-                    <a href="{{ route('donor.find') }}" class="btn btn-primary">Search for a Donor</a>
+                    <a href="{{ route('hospital.edit', $hospital->id) }}" class="btn btn-danger">Edit</a>
+                    <a href="{{ route('donor.find') }}" class="btn btn-danger">Search for a Donor</a>
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
                         <div class="count">{{ $count['virgin'] }}</div>
                         <div>
                             <div class="count-desc">Sent<br>appointments</div>
-                            <a href="{{ route('appointment.sent') }}" class="btn btn-primary">View</a>
+                            <a href="{{ route('appointment.sent') }}" class="btn btn-danger">View</a>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         <div class="count">{{ $count['accepted'] }}</div>
                         <div>
                             <div class="count-desc">Accepted<br>appointments</div>
-                            <a href="{{ route('appointment.accepted') }}" class="btn btn-primary">View</a>
+                            <a href="{{ route('appointment.accepted') }}" class="btn btn-danger">View</a>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         <div class="count">{{ $count['completed'] }}</div>
                         <div>
                             <div class="count-desc">Approved<br>appointments</div>
-                            <a href="{{ route('appointment.approved') }}" class="btn btn-primary">View</a>
+                            <a href="{{ route('appointment.approved') }}" class="btn btn-danger">View</a>
                         </div>
                     </div>
                 </div>
