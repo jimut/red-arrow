@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1>Accepted appointments</h1>
-                <p>These people have accepted the appointment and are possibly coming.</p>
+                <h1 class="text-white">Accepted appointments</h1>
+                <p class="text-white">These people have accepted the appointment and are possibly coming.</p>
             </div>
         </div>
 
@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <ul class="list-group">
+                <ul class="list-group weird-shadow">
                     @foreach ($accepted as $appointment)
                         <li class="list-group-item flex-row">
                             <div class="flex">
@@ -29,4 +29,7 @@
             </div>
         </div>
     </div>
+
+    <div class="backdrop-weird-color"></div>
+
 @endsection

@@ -5772,6 +5772,9 @@ button.close {
 strong {
   font-weight: 500; }
 
+.text-white {
+  color: #fff; }
+
 .space-left {
   margin-left: 15px; }
 

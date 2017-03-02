@@ -5,11 +5,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h1>Edit information</h1>
+            <h1 class="text-white">Edit information</h1>
 
             <div class="divider-10"></div>
 
-            <div class="panel panel-default">
+            <div class="panel panel-default weird-shadow">
                 <div class="panel-body">
                     <form class="form-horizontal" action="{{ route('donor.update', $donor->id) }}" method="POST" enctype="multipart/form-data">
 
@@ -139,4 +139,5 @@
     </div>
 </div>
 
+<div class="backdrop-weird-color"></div>
 @endsection

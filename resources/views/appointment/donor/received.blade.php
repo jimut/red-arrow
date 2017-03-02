@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1>Received appointments</h1>
-                <p>These hospitals are requesting your blood type right now.</p>
+                <h1 class="text-white">Received appointments</h1>
+                <p class="text-white">These hospitals are requesting your blood type right now.</p>
             </div>
         </div>
 
@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <ul class="list-group">
+                <ul class="list-group weird-shadow">
                     @foreach ($received as $appointment)
                         <li class="list-group-item flex-row">
                             <div class="flex">
@@ -31,4 +31,7 @@
             </div>
         </div>
     </div>
+
+    <div class="backdrop-weird-color"></div>
+
 @endsection

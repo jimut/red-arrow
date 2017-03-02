@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1>Donation review</h1>
+                <h1 class="text-white">Donation review</h1>
 
                 <div class="divider-10"></div>
 
-                <div class="panel panel-default">
+                <div class="panel panel-default weird-shadow">
                     <div class="panel-body">
                         <div class="row space-bottom">
                             <div class="col-md-4 text-right"><strong>Donor Name</strong></div>
@@ -50,4 +50,7 @@
             </div>
         </div>
     </div>
+
+    <div class="backdrop-weird-color"></div>
+
 @endsection

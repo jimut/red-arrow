@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1>Sent appointments</h1>
-                <p>You sent notifications to these people.</p>
+                <h1 class="text-white">Sent appointments</h1>
+                <p class="text-white">You sent notifications to these people.</p>
             </div>
         </div>
 
@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <ul class="list-group">
+                <ul class="list-group weird-shadow">
                     @foreach ($sent as $appointment)
                         <li class="list-group-item flex-row">
                             <div class="flex">
@@ -29,4 +29,7 @@
             </div>
         </div>
     </div>
+
+    <div class="backdrop-weird-color"></div>
+
 @endsection
