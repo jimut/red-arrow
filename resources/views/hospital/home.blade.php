@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-10 right-column">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <h1>{{ $hospital->name }}</h1>
                     <p>
                         <strong>Regitration Number:</strong> {{ $hospital->reg_no }} <br>

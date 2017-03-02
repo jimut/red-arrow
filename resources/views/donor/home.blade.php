@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-10 right-column">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <h1>Hi, {{ $donor->name }}</h1>
                     <p>
                         <strong>Date of Birth:</strong> {{ $donor->dob }} <br>

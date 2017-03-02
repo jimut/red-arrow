@@ -44,6 +44,13 @@ function initAutocomplete () {
     let searchBox = new google.maps.places.SearchBox(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
+    input.addEventListener('keydown', function (evt) {
+        if (evt.keyCode === 13) {
+            evt.preventDefault();
+            return false;
+        }
+    });
+
     map.addListener('bounds_changed', function () {
         searchBox.setBounds(map.getBounds());
     });
