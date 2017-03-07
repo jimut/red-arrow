@@ -59,7 +59,7 @@ class DonorController extends Controller
         }
 
         return response()->json([
-            'count'  => count($donors),
+            'count'  => count($searchableDonors),
             'donors' => $searchableDonors
         ]);
     }
