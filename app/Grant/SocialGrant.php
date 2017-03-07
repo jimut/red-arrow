@@ -123,7 +123,8 @@ class SocialGrant extends AbstractGrant
         if (!$user) {
             $user = User::create([
                 'email' => $email,
-                'name' => $name
+                'name' => $name,
+                'activated' => true
             ]);
         }
 
