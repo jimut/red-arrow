@@ -16,7 +16,7 @@ class Donor extends Model
      * @var array
      */
     protected $hidden = [
-        'user_id', 'avatar', 'created_at', 'updated_at'
+        'user_id', 'avatar', 'created_at', 
     ];
 
     public function user()

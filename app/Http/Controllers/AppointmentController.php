@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Donor;
 use App\Appointment;
 use App\Events\AppointmentCreated;
 use App\Services\AppointmentService;
@@ -10,6 +11,8 @@ use Illuminate\Http\Request;
 class AppointmentController extends Controller
 {
     protected $appointmentService;
+
+    private $blockFor = 90;
 
     public function __construct(AppointmentService $appointmentService)
     {
@@ -21,6 +24,14 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         if ($request->user()->donor) abort(403);
+        
+        $lastReview = Donor::find($request->donor_id)->appointments()->orderBy('updated_at', 'desc')->where('status', 'COMPLETED')->first();
+        if ($lastReview && strtotime($lastReview->updated_at) + 60 * 60 * 24 * $this->blockFor > time()) {
+            return response()->json([
+                'success' => 0,
+                'error' => 'Blocked' 
+            ]);
+        }
 
         $appointment = $this->appointmentService->createAppointment($request->user()->hospital->id, $request->donor_id);
 

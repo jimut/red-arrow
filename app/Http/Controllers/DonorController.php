@@ -11,6 +11,8 @@ class DonorController extends Controller
 {
     protected $imageStorageService;
 
+    private $blockFor = 90;
+
     /**
     * Validation rules for hospital model
     *
@@ -48,7 +50,15 @@ class DonorController extends Controller
     {
         $donors = Donor::all();
 
-        return response()->json($donors->toArray());
+        $searchableDonors = [];
+        foreach ($donors as $donor) {
+            $lastReview = $donor->appointments()->orderBy('updated_at', 'desc')->where('status', 'COMPLETED')->first();
+            if ($lastReview === null || strtotime($lastReview->updated_at) + 60 * 60 * 24 * $this->blockFor < time()) {
+                $searchableDonors[] = $donor;
+            }
+        }
+
+        return response()->json($searchableDonors);
     }
 
     /**

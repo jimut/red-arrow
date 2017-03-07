@@ -26,6 +26,8 @@ class DonorController extends Controller
         'blood_type' => 'required',
     ];
 
+    private $blockFor = 90;
+
     public $messages = [
         'dob.before' => 'Your age must be atleast 18 years',
     ];
@@ -48,9 +50,17 @@ class DonorController extends Controller
     {
         $donors = Donor::all();
 
+        $searchableDonors = [];
+        foreach ($donors as $donor) {
+            $lastReview = $donor->appointments()->orderBy('updated_at', 'desc')->where('status', 'COMPLETED')->first();
+            if ($lastReview === null || strtotime($lastReview->updated_at) + 60 * 60 * 24 * $this->blockFor < time()) {
+                $searchableDonors[] = $donor;
+            }
+        }
+
         return response()->json([
             'count'  => count($donors),
-            'donors' => $donors
+            'donors' => $searchableDonors
         ]);
     }
 
